@@ -1,25 +1,25 @@
 import { Hono } from 'hono';
+import { HTTPException } from 'hono/http-exception';
 import { openAPIRouteHandler } from 'hono-openapi';
 import { Scalar } from '@scalar/hono-api-reference';
-import { jwt, type JwtVariables } from 'hono/jwt';
 import { logger } from 'hono/logger';
 import { cors } from 'hono/cors';
+import { jwt } from 'hono/jwt';
 
 import auth from './routes/auth';
 import users from './routes/users';
 
-const app = new Hono<{ Variables: JwtVariables }>();
+const app = new Hono();
 
 app.use(logger());
-app.use('/v1/*', cors());
-app.use(
-  '/v1/*',
-  jwt({
-    secret: process.env.JWT_SECRET!,
-    alg: 'HS256',
-    cookie: 'token',
-  }),
-);
+
+app.onError((err, c) => {
+  if (err instanceof HTTPException) {
+    return c.json({ status: err.status, message: err.message }, err.status);
+  }
+
+  return c.json({ success: false, message: 'Internal Server Error' }, 500);
+});
 
 app.get(
   '/openapi',
@@ -28,7 +28,7 @@ app.get(
       info: {
         title: 'Balabol.cc API',
         version: '1.0.0',
-        description: 'The simplest link shortener & social landing hosting',
+        description: 'The simplest social landing page hosting and link shortener',
       },
       servers: [
         {
@@ -39,9 +39,24 @@ app.get(
     },
   }),
 );
+
 app.get('/docs', Scalar({ url: '/openapi' }));
 
-app.route('/auth', auth);
-app.route('/users', users);
+const v1 = new Hono();
 
-export default app;
+v1.use('/*', cors());
+
+v1.route('/auth', auth);
+
+v1.use(
+  '/users/*',
+  jwt({ secret: process.env.JWT_SECRET!, alg: 'HS256', cookie: 'token' }),
+);
+v1.route('/users', users);
+
+app.route('/v1', v1);
+
+export default {
+  port: 8080,
+  fetch: app.fetch,
+};
