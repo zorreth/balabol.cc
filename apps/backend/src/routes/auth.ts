@@ -41,6 +41,36 @@ app.get(
   }),
   async (c) => {
     const googleUser = c.get('user-google');
+
+    if (!googleUser?.id) {
+      return c.redirect(process.env.FRONTEND_URL! + '/me/auth?error=provider');
+    }
+
+    let [user] = await db
+      .select()
+      .from(users)
+      .where(and(eq(users.provider, 'google'), eq(users.providerId, googleUser.id)))
+      .limit(1);
+
+    if (!user) {
+      const [createdUser] = await db
+        .insert(users)
+        .values({
+          displayName: googleUser.name,
+          avatarUrl: googleUser.picture,
+          provider: 'google',
+          providerId: googleUser.id,
+        })
+        .returning();
+
+      user = createdUser;
+    }
+
+    if (!user) {
+      return c.redirect(process.env.FRONTEND_URL! + '/me/auth?error=server');
+    }
+
+    addTokenCookie(c, user.id);
     return c.redirect(process.env.FRONTEND_URL! + '/me/settings');
   },
 );
