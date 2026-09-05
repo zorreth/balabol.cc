@@ -117,7 +117,12 @@ app.patch(
       throw new HTTPException(404, { message: 'User not found' });
     }
 
-    return c.json(updatedUser);
+    return c.json({
+      username: updatedUser.username,
+      displayName: updatedUser.displayName,
+      bio: updatedUser.bio,
+      avatarUrl: updatedUser.avatarUrl,
+    });
   },
 );
 
