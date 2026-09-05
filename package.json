@@ -22,5 +22,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@valibot/to-json-schema": "^1.7.1",
+    "valibot": "^1.4.2"
+  }
 }
