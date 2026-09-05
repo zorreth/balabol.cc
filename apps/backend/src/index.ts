@@ -14,6 +14,8 @@ const app = new Hono();
 app.use(logger());
 
 app.onError((err, c) => {
+  console.error(err.message);
+
   if (err instanceof HTTPException) {
     return c.json({ status: err.status, message: err.message }, err.status);
   }
