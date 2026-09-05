@@ -29,12 +29,12 @@ app.get(
       info: {
         title: 'Balabol.cc API',
         version: '1.0.0',
-        description: 'The simplest social landing page hosting and link shortener',
+        description: 'The easiest social landing page hosting and link shortener',
       },
       servers: [
         {
-          url: 'https://api.balabol.cc/v1',
-          description: 'Production',
+          url: 'https://api.balabol.cc',
+          description: 'Production Server',
         },
       ],
     },
