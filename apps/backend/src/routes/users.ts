@@ -6,6 +6,7 @@ import { eq } from 'drizzle-orm';
 import { describeRoute, resolver, validator } from 'hono-openapi';
 import * as v from 'valibot';
 import { jwt } from 'hono/jwt';
+import { bearerAuth } from 'hono/bearer-auth';
 
 const userSchema = v.object({
   username: v.string(),
@@ -72,6 +73,7 @@ app.patch(
   '/me',
   describeRoute({
     description: 'Update the current authorized user information',
+    security: [{ cookieAuth: [] }, { bearerAuth: [] }],
     responses: {
       200: {
         description: 'Successfully updated user',

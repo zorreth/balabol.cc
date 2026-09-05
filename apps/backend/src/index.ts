@@ -4,7 +4,6 @@ import { Scalar } from '@scalar/hono-api-reference';
 import { openAPIRouteHandler } from 'hono-openapi';
 import { logger } from 'hono/logger';
 import { cors } from 'hono/cors';
-import { jwt } from 'hono/jwt';
 
 import auth from './routes/auth';
 import users from './routes/users';
@@ -36,12 +35,36 @@ app.get(
           url: 'https://api.balabol.cc',
           description: 'Production Server',
         },
+        {
+          url: 'http://localhost:8080',
+          description: 'Local Development Server',
+        },
       ],
+      components: {
+        securitySchemes: {
+          cookieAuth: {
+            type: 'apiKey',
+            in: 'cookie',
+            name: 'token',
+            description:
+              'Use this to add JWT inside a cookie. Adds automatically after logging in via OAuth2.',
+          },
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
+            description: 'Use this to add JWT directly inside Authorization header.',
+          },
+        },
+      },
     },
   }),
 );
 
-app.get('/docs', Scalar({ url: '/openapi' }));
+app.get(
+  '/docs',
+  Scalar({ url: '/openapi', authentication: { preferredSecurityScheme: 'cookieAuth' } }),
+);
 
 const v1 = new Hono();
 
