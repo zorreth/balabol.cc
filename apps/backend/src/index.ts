@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { HTTPException } from 'hono/http-exception';
-import { openAPIRouteHandler } from 'hono-openapi';
 import { Scalar } from '@scalar/hono-api-reference';
+import { openAPIRouteHandler } from 'hono-openapi';
 import { logger } from 'hono/logger';
 import { cors } from 'hono/cors';
 import { jwt } from 'hono/jwt';
@@ -14,12 +14,11 @@ const app = new Hono();
 app.use(logger());
 
 app.onError((err, c) => {
-  console.error(err.message);
-
   if (err instanceof HTTPException) {
     return c.json({ status: err.status, message: err.message }, err.status);
   }
 
+  console.error(err.message);
   return c.json({ success: false, message: 'Internal Server Error' }, 500);
 });
 
