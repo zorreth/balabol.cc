@@ -45,14 +45,9 @@ app.get('/docs', Scalar({ url: '/openapi' }));
 
 const v1 = new Hono();
 
-v1.use('/*', cors());
+v1.use(cors());
 
 v1.route('/auth', auth);
-
-v1.use(
-  '/users/*',
-  jwt({ secret: process.env.JWT_SECRET!, alg: 'HS256', cookie: 'token' }),
-);
 v1.route('/users', users);
 
 app.route('/v1', v1);
