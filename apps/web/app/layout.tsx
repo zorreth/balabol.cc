@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Noto_Sans } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
+import { Header } from '@/components/header';
 
 const notoSans = Noto_Sans({ subsets: ['latin', 'cyrillic'], variable: '--font-sans' });
 
@@ -14,9 +15,12 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
-      className={cn('h-full', 'antialiased', 'font-sans', 'dark', notoSans.variable)}
+      className={cn('h-full', 'antialiased', 'font-sans', notoSans.variable)}
     >
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
