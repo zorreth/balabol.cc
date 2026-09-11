@@ -19,11 +19,25 @@ const DisplayNameSchema = v.pipe(
   v.maxLength(64, 'The maximum display name length is 64 characters.'),
 );
 
+const LinkNameSchema = v.pipe(
+  v.string(),
+  v.maxLength(64, 'The maximum link name length is 64 characters.'),
+);
+
+const LinkUrlSchema = v.pipe(v.string(), v.url('The link URL is badly formatted.'));
+
+const LinkSchema = v.object({
+  id: v.number(),
+  name: LinkNameSchema,
+  url: LinkUrlSchema,
+});
+
 const UserSchema = v.object({
   username: UsernameSchema,
   displayName: DisplayNameSchema,
   bio: v.string(),
   avatarUrl: v.string(),
+  links: v.array(LinkSchema),
 });
 
 const UserUpdateSchema = v.object({
@@ -61,22 +75,30 @@ app.get(
   async (c) => {
     const username = c.req.param('username');
 
-    const [user] = await db
-      .select()
-      .from(users)
-      .where(eq(users.username, username))
-      .limit(1);
+    const user = await db.query.users.findFirst({
+      where: { username },
+      columns: {
+        username: true,
+        displayName: true,
+        bio: true,
+        avatarUrl: true,
+      },
+      with: {
+        links: {
+          columns: {
+            id: true,
+            name: true,
+            url: true,
+          },
+        },
+      },
+    });
 
     if (!user) {
       throw new HTTPException(404, { message: 'User not found' });
     }
 
-    return c.json({
-      username: user.username,
-      displayName: user.displayName,
-      bio: user.bio,
-      avatarUrl: user.avatarUrl,
-    });
+    return c.json(user);
   },
 );
 
