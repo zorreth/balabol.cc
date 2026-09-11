@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import logo from '../public/logo.svg';
 
 const socials = [
   {
@@ -16,13 +17,7 @@ export function Footer() {
     <footer className="px-4 py-12 bg-accent mt-auto">
       <div className="flex justify-between items-center container mx-auto gap-2 flex-col sm:flex-row">
         <div className="flex flex-col gap-2 items-center sm:items-start">
-          <Image
-            src="/logo.svg"
-            alt="logo"
-            width={120}
-            height={80}
-            className="w-32 h-auto"
-          />
+          <Image src={logo} alt="logo" className="w-32 h-auto" />
           <span>&copy; 2026 Kirill Siukhin. All rights reserved.</span>
         </div>
 
