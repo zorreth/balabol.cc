@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import logo from '../public/logo.svg';
 import { Button, buttonVariants } from './ui/button';
 import { MenuIcon } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
@@ -25,7 +24,9 @@ export function Header() {
     <header className="container mx-auto p-4 flex justify-between items-center">
       <Link href="/">
         <Image
-          src={logo}
+          src="/logo.svg"
+          width={340}
+          height={80}
           alt="logo"
           className="hover:scale-105 transition w-36 h-auto"
           loading="eager"
