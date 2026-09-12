@@ -3,11 +3,11 @@ import Image from 'next/image';
 
 export default function Page() {
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="font-bold text-3xl mb-2">Brand Assets</h1>
+    <div className="flex flex-col items-center text-center container mx-auto p-8">
+      <h1 className="font-bold text-3xl mb-4">Brand Assets</h1>
 
       <p>
-        The Balabol.cc logo and icon are licensed under{' '}
+        The Balabol.cc logo and the icon are licensed under{' '}
         <a
           href="https://creativecommons.org/licenses/by/4.0/"
           target="_blank"
@@ -18,8 +18,8 @@ export default function Page() {
         .
       </p>
 
-      <p className="mb-4">
-        Both logo and icon use graphics from{' '}
+      <p className="mb-8">
+        Both the logo and the icon use graphics from{' '}
         <a
           href="https://github.com/twitter/twemoji"
           target="_blank"
