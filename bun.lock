@@ -15,6 +15,7 @@
       "dependencies": {
         "@hono/oauth-providers": "^0.9.0",
         "@hono/standard-validator": "^0.4.0",
+        "@repo/schemas": "workspace:*",
         "@scalar/hono-api-reference": "^0.12.1",
         "@valibot/to-json-schema": "^1.7.1",
         "drizzle-orm": "^1.0.0-rc.4",
@@ -54,6 +55,18 @@
         "eslint-config-next": "16.3.5",
         "tailwindcss": "^4.3.3",
         "typescript": "^7.0.2",
+      },
+    },
+    "packages/schemas": {
+      "name": "@repo/schemas",
+      "dependencies": {
+        "valibot": "^1.5.0",
+      },
+      "devDependencies": {
+        "@types/bun": "latest",
+      },
+      "peerDependencies": {
+        "typescript": "^7",
       },
     },
   },
@@ -337,6 +350,8 @@
     "@nodelib/fs.walk": ["@nodelib/fs.walk@1.2.8", "", { "dependencies": { "@nodelib/fs.scandir": "2.1.5", "fastq": "^1.6.0" } }, "sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg=="],
 
     "@nolyfill/is-core-module": ["@nolyfill/is-core-module@1.0.39", "", {}, "sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA=="],
+
+    "@repo/schemas": ["@repo/schemas@workspace:packages/schemas"],
 
     "@rtsao/scc": ["@rtsao/scc@1.1.0", "", {}, "sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g=="],
 

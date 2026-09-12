@@ -1,0 +1,17 @@
+{
+  "name": "@repo/schemas",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^7"
+  },
+  "dependencies": {
+    "valibot": "^1.5.0"
+  }
+}

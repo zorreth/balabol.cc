@@ -4,59 +4,15 @@ import { db } from '../db';
 import { users } from '../db/schema';
 import { eq } from 'drizzle-orm';
 import { describeRoute, resolver, validator } from 'hono-openapi';
-import * as v from 'valibot';
 import { jwt } from 'hono/jwt';
-
-const UsernameSchema = v.pipe(
-  v.string(),
-  v.minLength(3, 'The minimum username length is 3 characters.'),
-  v.maxLength(64, 'The maximum username length is 64 characters.'),
-  v.regex(/^[a-zA-Z0-9]+$/, 'The username must be alphanumeric.'),
-);
-
-const DisplayNameSchema = v.pipe(
-  v.string(),
-  v.maxLength(64, 'The maximum display name length is 64 characters.'),
-);
-
-const LinkNameSchema = v.pipe(
-  v.string(),
-  v.maxLength(64, 'The maximum link name length is 64 characters.'),
-);
-
-const LinkUrlSchema = v.pipe(v.string(), v.url('The link URL is badly formatted.'));
-
-const LinkSchema = v.object({
-  id: v.number(),
-  name: LinkNameSchema,
-  url: LinkUrlSchema,
-});
-
-const UserSchema = v.object({
-  username: UsernameSchema,
-  displayName: DisplayNameSchema,
-  bio: v.string(),
-  avatarUrl: v.string(),
-  links: v.array(LinkSchema),
-});
-
-const UserUpdateSchema = v.object({
-  username: v.optional(UsernameSchema),
-  displayName: v.optional(DisplayNameSchema),
-  bio: v.optional(v.string()),
-});
-
-const ErrorSchema = v.object({
-  status: v.number(),
-  message: v.string(),
-});
+import { UserSchema, UserUpdateSchema, ErrorSchema } from '@repo/schemas';
 
 const app = new Hono();
 
 app.get(
   '/:username',
   describeRoute({
-    description: 'Get user by username',
+    description: "Get user's profile and links information by username",
     responses: {
       200: {
         description: 'Successfully retrieved user',
@@ -105,7 +61,7 @@ app.get(
 app.patch(
   '/me',
   describeRoute({
-    description: 'Update the current authorized user information',
+    description: 'Update the current user profile',
     security: [{ cookieAuth: [] }, { bearerAuth: [] }],
     responses: {
       200: {

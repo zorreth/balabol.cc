@@ -7,6 +7,7 @@ import { cors } from 'hono/cors';
 
 import auth from './routes/auth';
 import users from './routes/users';
+import links from './routes/links';
 
 const app = new Hono();
 
@@ -72,6 +73,7 @@ v1.use(cors());
 
 v1.route('/auth', auth);
 v1.route('/users', users);
+v1.route('/users/me/links', links);
 
 app.route('/v1', v1);
 
