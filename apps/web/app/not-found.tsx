@@ -1,4 +1,9 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
+
+export const metadata: Metadata = {
+  title: 'Not Found - Balabol.cc',
+};
 
 export default function NotFound() {
   return (

@@ -1,5 +1,11 @@
 import { buttonVariants } from '@/components/ui/button';
+import { Metadata } from 'next';
 import Image from 'next/image';
+
+export const metadata: Metadata = {
+  title: 'Brand Assets - Balabol.cc',
+  description: 'The official Balabol.cc logos and icons that are available to download',
+};
 
 export default function Page() {
   return (
