@@ -76,12 +76,6 @@ app.patch(
           'application/json': { schema: resolver(ErrorSchema) },
         },
       },
-      404: {
-        description: 'User not found',
-        content: {
-          'application/json': { schema: resolver(ErrorSchema) },
-        },
-      },
     },
   }),
   jwt({ secret: process.env.JWT_SECRET!, cookie: 'token', alg: 'HS256' }),
@@ -100,18 +94,18 @@ app.patch(
         bio: body.bio,
       })
       .where(eq(users.id, userId))
-      .returning();
+      .returning({
+        username: users.username,
+        displayName: users.displayName,
+        bio: users.bio,
+        avatarUrl: users.avatarUrl,
+      });
 
     if (!updatedUser) {
-      throw new HTTPException(404, { message: 'User not found' });
+      throw new HTTPException(401, { message: 'User account no longer exists' });
     }
 
-    return c.json({
-      username: updatedUser.username,
-      displayName: updatedUser.displayName,
-      bio: updatedUser.bio,
-      avatarUrl: updatedUser.avatarUrl,
-    });
+    return c.json(updatedUser);
   },
 );
 
