@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Button, buttonVariants } from './ui/button';
 import { MenuIcon } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
+import { AuthButton } from './auth-button';
 
 const navItems = [
   {
@@ -45,9 +46,7 @@ export function Header() {
         ))}
       </div>
 
-      <Button className="hidden md:flex" size="lg">
-        Sign In
-      </Button>
+      <AuthButton className="hidden md:flex" />
 
       <Sheet>
         <SheetTrigger
@@ -70,7 +69,7 @@ export function Header() {
               ))}
             </div>
 
-            <Button size="lg">Sign In</Button>
+            <AuthButton />
           </div>
         </SheetContent>
       </Sheet>
