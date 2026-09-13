@@ -76,7 +76,7 @@ app.get(
     }
 
     addTokenCookie(c, user.id);
-    return c.redirect(process.env.FRONTEND_URL! + '/me/settings');
+    return c.redirect(`${process.env.FRONTEND_URL!}/${user.username}`);
   },
 );
 
@@ -137,7 +137,7 @@ app.get(
     }
 
     await addTokenCookie(c, user.id);
-    return c.redirect(process.env.FRONTEND_URL! + '/me/settings');
+    return c.redirect(`${process.env.FRONTEND_URL!}/${user.username}`);
   },
 );
 
@@ -184,7 +184,7 @@ app.get(
     }
 
     await addTokenCookie(c, user.id);
-    return c.redirect(process.env.FRONTEND_URL! + '/me/settings');
+    return c.redirect(`${process.env.FRONTEND_URL!}/${user.username}`);
   },
 );
 
