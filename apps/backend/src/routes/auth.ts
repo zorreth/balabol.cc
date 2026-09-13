@@ -3,16 +3,19 @@ import { googleAuth } from '@hono/oauth-providers/google';
 import { discordAuth } from '@hono/oauth-providers/discord';
 import { githubAuth } from '@hono/oauth-providers/github';
 import { db } from '../db';
-import { users } from '../db/schema';
+import { links, users } from '../db/schema';
 import { and, eq } from 'drizzle-orm';
 import { sign } from 'hono/jwt';
 import { setCookie } from 'hono/cookie';
+import {
+  parseConnections,
+  type DiscordConnection,
+} from '../../utils/discord-connections';
 
 const app = new Hono();
 
 async function addTokenCookie(c: Context, userId: number) {
   const expiresIn = 60 * 60 * 24 * 7;
-
   const exp = Math.floor(Date.now() / 1000) + expiresIn;
 
   const jwt = await sign(
@@ -101,11 +104,17 @@ app.get(
         .insert(users)
         .values({
           displayName: discordUser.global_name ?? discordUser.username,
-          avatarUrl: discordUser.avatar,
-          provider: `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`,
+          avatarUrl: `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`,
+          provider: 'discord',
           providerId: discordUser.id,
         })
         .returning();
+
+      if (!createdUser) {
+        return c.redirect(process.env.FRONTEND_URL! + '/me/auth?error=server');
+      }
+
+      user = createdUser;
 
       try {
         const res = await fetch('https://discord.com/api/v10/users/@me/connections', {
@@ -114,17 +123,12 @@ app.get(
           },
         });
 
-        // TODO: Add connections as user links
-        // const connections = await res.json();
+        const connections = (await res.json()) as DiscordConnection[];
+
+        await db.insert(links).values(parseConnections(connections, user.id));
       } catch (err) {
         console.warn('Failed to fetch Discord connections:', err);
       }
-
-      user = createdUser;
-    }
-
-    if (!user) {
-      return c.redirect(process.env.FRONTEND_URL! + '/me/auth?error=server');
     }
 
     await addTokenCookie(c, user.id);
