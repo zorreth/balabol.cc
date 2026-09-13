@@ -22,7 +22,13 @@ export default function NotFound() {
         if you think there is a mistake.
       </p>
 
-      <Image src="/cat-error.gif" alt="cat error" width={498} height={328} />
+      <Image
+        src="/cat-error.gif"
+        alt="cat error"
+        loading="eager"
+        width={498}
+        height={328}
+      />
     </div>
   );
 }
