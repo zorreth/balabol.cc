@@ -47,7 +47,7 @@ app.get(
     const googleUser = c.get('user-google');
 
     if (!googleUser?.id) {
-      return c.redirect(process.env.FRONTEND_URL! + '/me/auth?error=provider');
+      return c.redirect(process.env.FRONTEND_URL! + '/error?cause=provider');
     }
 
     let [user] = await db
@@ -72,7 +72,7 @@ app.get(
     }
 
     if (!user) {
-      return c.redirect(process.env.FRONTEND_URL! + '/me/auth?error=server');
+      return c.redirect(process.env.FRONTEND_URL! + '/error?cause=server');
     }
 
     addTokenCookie(c, user.id);
@@ -92,7 +92,7 @@ app.get(
     const token = c.get('token')?.token;
 
     if (!discordUser?.id) {
-      return c.redirect(process.env.FRONTEND_URL! + '/me/auth?error=provider');
+      return c.redirect(process.env.FRONTEND_URL! + '/error?cause=provider');
     }
 
     let [user] = await db
@@ -116,7 +116,7 @@ app.get(
         .returning();
 
       if (!createdUser) {
-        return c.redirect(process.env.FRONTEND_URL! + '/me/auth?error=server');
+        return c.redirect(process.env.FRONTEND_URL! + '/error?cause=server');
       }
 
       user = createdUser;
@@ -152,7 +152,7 @@ app.get(
     const githubUser = c.get('user-github');
 
     if (!githubUser?.id) {
-      return c.redirect(process.env.FRONTEND_URL! + '/me/auth?error=provider');
+      return c.redirect(process.env.FRONTEND_URL! + '/error?cause=provider');
     }
 
     let [user] = await db
@@ -180,7 +180,7 @@ app.get(
     }
 
     if (!user) {
-      return c.redirect(process.env.FRONTEND_URL! + '/me/auth?error=server');
+      return c.redirect(process.env.FRONTEND_URL! + '/error?cause=server');
     }
 
     await addTokenCookie(c, user.id);

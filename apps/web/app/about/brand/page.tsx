@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="flex flex-col items-center text-center container mx-auto p-8">
+    <div className="flex flex-col items-center text-center p-8">
       <h1 className="font-bold text-3xl mb-4">Brand Assets</h1>
 
       <p>
