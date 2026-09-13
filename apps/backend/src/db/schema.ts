@@ -3,7 +3,7 @@ import { defineRelations } from 'drizzle-orm';
 
 export const users = pgTable('users', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  username: varchar({ length: 64 }).unique(),
+  username: varchar({ length: 64 }).notNull().unique(),
   displayName: varchar('display_name', { length: 64 }),
   bio: varchar({ length: 500 }),
   avatarUrl: varchar('avatar_url'),

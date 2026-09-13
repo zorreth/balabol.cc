@@ -11,6 +11,7 @@ import {
   parseConnections,
   type DiscordConnection,
 } from '../../utils/discord-connections';
+import { getUniqueUsername } from '../../utils/username';
 
 const app = new Hono();
 
@@ -59,6 +60,7 @@ app.get(
       const [createdUser] = await db
         .insert(users)
         .values({
+          username: await getUniqueUsername(googleUser.name),
           displayName: googleUser.name,
           avatarUrl: googleUser.picture,
           provider: 'google',
@@ -103,8 +105,11 @@ app.get(
       const [createdUser] = await db
         .insert(users)
         .values({
+          username: await getUniqueUsername(discordUser.username),
           displayName: discordUser.global_name ?? discordUser.username,
-          avatarUrl: `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`,
+          avatarUrl: discordUser.avatar
+            ? `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`
+            : null,
           provider: 'discord',
           providerId: discordUser.id,
         })
@@ -162,6 +167,7 @@ app.get(
       const [createdUser] = await db
         .insert(users)
         .values({
+          username: await getUniqueUsername(githubUser.login),
           displayName: githubUser.name ?? githubUser.login,
           bio: githubUser.bio,
           avatarUrl: githubUser.avatar_url,
