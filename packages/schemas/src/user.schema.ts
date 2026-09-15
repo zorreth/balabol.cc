@@ -21,8 +21,12 @@ export const UserSchema = v.object({
   links: v.array(LinkSchema),
 });
 
+export type User = v.InferInput<typeof UserSchema>;
+
 export const UserUpdateSchema = v.object({
   username: v.optional(UsernameSchema),
   displayName: v.optional(DisplayNameSchema),
   bio: v.optional(v.string()),
 });
+
+export type UserUpdate = v.InferInput<typeof UserUpdateSchema>;

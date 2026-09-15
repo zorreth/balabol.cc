@@ -4,6 +4,8 @@ import { Button, buttonVariants } from './ui/button';
 import { MenuIcon } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 import { AuthButton } from './auth-button';
+import { Suspense } from 'react';
+import { Skeleton } from './ui/skeleton';
 
 const navItems = [
   {
@@ -46,7 +48,9 @@ export function Header() {
         ))}
       </div>
 
-      <AuthButton className="hidden md:flex" />
+      <Suspense fallback={<Skeleton className="size-10 rounded-full" />}>
+        <AuthButton className="hidden md:flex" />
+      </Suspense>
 
       <Sheet>
         <SheetTrigger
@@ -69,7 +73,9 @@ export function Header() {
               ))}
             </div>
 
-            <AuthButton />
+            <Suspense fallback={<Skeleton className="h-10 w-full rounded-full" />}>
+              <AuthButton />
+            </Suspense>
           </div>
         </SheetContent>
       </Sheet>

@@ -1,3 +1,4 @@
+import { cn } from 'cn';
 import { Button, buttonVariants } from './ui/button';
 import {
   Dialog,
@@ -10,9 +11,26 @@ import {
 import { GitHub } from './icons/github';
 import { Discord } from './icons/discord';
 import { Google } from './icons/google';
-import { cn } from 'cn';
+import { fetchCurrentUser } from '@/lib/api';
+import Link from 'next/link';
 
-export function AuthButton({ className }: { className?: string }) {
+export async function AuthButton({ className }: { className?: string }) {
+  const user = await fetchCurrentUser();
+
+  if (user) {
+    return (
+      <Link href={`/${user.username}`} className="hover:scale-105 transition">
+        <img
+          src={user.avatarUrl}
+          alt={`${user.username}'s profile picture`}
+          className="rounded-full border-2"
+          width={48}
+          height={48}
+        />
+      </Link>
+    );
+  }
+
   return (
     <Dialog>
       <DialogTrigger render={<Button size="lg" className={className} />}>
