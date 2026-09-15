@@ -22,6 +22,7 @@ export function Footer() {
             height={80}
             alt="logo"
             className="w-32 h-auto"
+            loading="eager"
           />
           <span>&copy; 2026 Kirill Siukhin. All rights reserved.</span>
         </div>

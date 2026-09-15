@@ -1,41 +1,22 @@
-import { cn } from 'cn';
-import { Button, buttonVariants } from './ui/button';
 import {
   Dialog,
+  DialogTrigger,
   DialogContent,
   DialogHeader,
-  DialogTrigger,
   DialogTitle,
   DialogDescription,
 } from './ui/dialog';
+import { Button } from './ui/button';
+import { cn } from 'cn';
+import { buttonVariants } from './ui/button';
 import { GitHub } from './icons/github';
 import { Discord } from './icons/discord';
 import { Google } from './icons/google';
-import { fetchCurrentUser } from '@/lib/api';
-import Link from 'next/link';
 
-export async function AuthButton({ className }: { className?: string }) {
-  const user = await fetchCurrentUser();
-
-  if (user) {
-    return (
-      <Link href={`/${user.username}`} className="hover:scale-105 transition">
-        <img
-          src={user.avatarUrl}
-          alt={`${user.username}'s profile picture`}
-          className="rounded-full border-2"
-          width={48}
-          height={48}
-        />
-      </Link>
-    );
-  }
-
+export function SignInModal() {
   return (
     <Dialog>
-      <DialogTrigger render={<Button size="lg" className={className} />}>
-        Sign In
-      </DialogTrigger>
+      <DialogTrigger render={<Button size="lg" />}>Sign In</DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
