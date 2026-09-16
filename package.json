@@ -2,7 +2,7 @@
   "name": "balabol",
   "devDependencies": {
     "prettier": "3.9.6",
-    "turbo": "^2.10.12",
+    "turbo": "^2.10.13",
     "typescript": "^7.0.2"
   },
   "devEngines": {
