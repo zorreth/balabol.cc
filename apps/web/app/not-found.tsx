@@ -28,6 +28,7 @@ export default function NotFound() {
         loading="eager"
         width={498}
         height={328}
+        unoptimized
       />
     </div>
   );

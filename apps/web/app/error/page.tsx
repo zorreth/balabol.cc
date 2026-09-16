@@ -32,6 +32,7 @@ export default async function Page({
         loading="eager"
         width={498}
         height={280}
+        unoptimized
       />
     </div>
   );
