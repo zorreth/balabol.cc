@@ -1,4 +1,4 @@
-import { User } from '@repo/schemas';
+import { ErrorResponse, User } from '@repo/schemas';
 import { cookies } from 'next/headers';
 
 export async function fetchCurrentUser(): Promise<User | null> {
@@ -17,8 +17,13 @@ export async function fetchCurrentUser(): Promise<User | null> {
     },
   });
 
-  if (res.status === 401) {
-    return null;
+  if (!res.ok) {
+    if (res.status === 401) {
+      return null;
+    }
+
+    const json = (await res.json()) as ErrorResponse;
+    throw new Error(json.message);
   }
 
   return res.json();

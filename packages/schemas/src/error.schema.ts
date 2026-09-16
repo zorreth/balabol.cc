@@ -4,3 +4,5 @@ export const ErrorSchema = v.object({
   status: v.number(),
   message: v.string(),
 });
+
+export type ErrorResponse = v.InferInput<typeof ErrorSchema>;

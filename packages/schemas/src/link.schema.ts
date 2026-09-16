@@ -16,7 +16,11 @@ export const LinkSchema = v.object({
   url: LinkUrlSchema,
 });
 
+export type Link = v.InferInput<typeof LinkSchema>;
+
 export const LinkCreateSchema = v.object({
   name: LinkNameSchema,
   url: LinkUrlSchema,
 });
+
+export type LinkCreate = v.InferInput<typeof LinkCreateSchema>;
