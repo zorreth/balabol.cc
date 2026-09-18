@@ -2,8 +2,6 @@ import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
 
 const montserrat = Montserrat({
   subsets: ['latin', 'cyrillic'],
@@ -21,11 +19,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang="en"
       className={cn('h-full', 'antialiased', 'font-sans', montserrat.variable)}
     >
-      <body className="flex flex-col min-h-screen">
-        <Header />
-        {children}
-        <Footer />
-      </body>
+      <body className="flex flex-col min-h-screen">{children}</body>
     </html>
   );
 }

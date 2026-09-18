@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ErrorMessage } from '@/components/error-message';
 import { fetchUserByUsername } from '@/lib/api';
+import { ErrorMessage } from '@/components/error-message';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 export async function generateMetadata({
   params,
@@ -42,8 +43,11 @@ export default async function Page({
   }
 
   return (
-    <div>
-      <h1>Hello, {user.username}!</h1>
-    </div>
+    <main className="flex flex-col items-center p-8">
+      <Avatar size="xl">
+        <AvatarImage src={user.avatarUrl} />
+        <AvatarFallback>{user.username.at(0)?.toUpperCase()}</AvatarFallback>
+      </Avatar>
+    </main>
   );
 }
