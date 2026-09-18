@@ -1,11 +1,16 @@
 import { Hono } from 'hono';
 import { describeRoute, validator, resolver } from 'hono-openapi';
-import { jwt } from 'hono/jwt';
 import { db } from '../db';
 import { links } from '../db/schema';
 import { HTTPException } from 'hono/http-exception';
-import { ErrorSchema, LinkCreateSchema, LinkSchema } from '@repo/schemas';
+import {
+  ErrorSchema,
+  LinkCreateSchema,
+  LinkSchema,
+  LinkUpdateSchema,
+} from '@repo/schemas';
 import { and, eq } from 'drizzle-orm';
+import { authenticate } from '../../utils/authenticate';
 
 const app = new Hono();
 
@@ -29,7 +34,7 @@ app.post(
       },
     },
   }),
-  jwt({ secret: process.env.JWT_SECRET!, cookie: 'token', alg: 'HS256' }),
+  authenticate,
   validator('json', LinkCreateSchema),
   async (c) => {
     const payload = c.get('jwtPayload') as { sub: number };
@@ -68,7 +73,7 @@ app.post(
 app.delete(
   '/:id',
   describeRoute({
-    description: 'Delete link by id',
+    description: 'Delete link by ID',
     responses: {
       204: {
         description: 'Successfully deleted link',
@@ -81,7 +86,7 @@ app.delete(
       },
     },
   }),
-  jwt({ secret: process.env.JWT_SECRET!, cookie: 'token', alg: 'HS256' }),
+  authenticate,
   async (c) => {
     const payload = c.get('jwtPayload') as { sub: number };
     const userId = payload.sub;
@@ -98,6 +103,68 @@ app.delete(
     }
 
     return c.body(null, 204);
+  },
+);
+
+app.patch(
+  '/:id',
+  describeRoute({
+    description: 'Update link by ID',
+    security: [{ cookieAuth: [] }, { bearerAuth: [] }],
+    responses: {
+      200: {
+        description: 'Successfully updated link',
+        content: {
+          'application/json': { schema: resolver(LinkSchema) },
+        },
+      },
+      401: {
+        description: 'Unauthorized',
+        content: {
+          'application/json': { schema: resolver(ErrorSchema) },
+        },
+      },
+      404: {
+        description: 'Link not found',
+        content: {
+          'application/json': { schema: resolver(ErrorSchema) },
+        },
+      },
+    },
+  }),
+  authenticate,
+  validator('json', LinkUpdateSchema),
+  async (c) => {
+    const payload = c.get('jwtPayload') as { sub: number };
+    const userId = payload.sub;
+
+    const linkIdParam = c.req.param('id');
+    const linkId = parseInt(linkIdParam);
+
+    if (isNaN(linkId)) {
+      throw new HTTPException(400, { message: 'Invalid link ID format' });
+    }
+
+    const body = c.req.valid('json');
+
+    const [updatedLink] = await db
+      .update(links)
+      .set({
+        name: body.name,
+        url: body.url,
+      })
+      .where(and(eq(links.id, linkId), eq(links.userId, userId)))
+      .returning({
+        id: links.id,
+        name: links.name,
+        url: links.url,
+      });
+
+    if (!updatedLink) {
+      throw new HTTPException(404, { message: 'Link not found' });
+    }
+
+    return c.json(updatedLink);
   },
 );
 

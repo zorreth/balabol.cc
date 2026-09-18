@@ -4,8 +4,8 @@ import { db } from '../db';
 import { users } from '../db/schema';
 import { eq } from 'drizzle-orm';
 import { describeRoute, resolver, validator } from 'hono-openapi';
-import { jwt } from 'hono/jwt';
 import { UserSchema, UserUpdateSchema, ErrorSchema } from '@repo/schemas';
+import { authenticate } from '../../utils/authenticate';
 
 const app = new Hono();
 
@@ -29,7 +29,7 @@ app.get(
       },
     },
   }),
-  jwt({ secret: process.env.JWT_SECRET!, cookie: 'token', alg: 'HS256' }),
+  authenticate,
   async (c) => {
     const payload = c.get('jwtPayload') as { sub: number };
     const userId = payload.sub;
@@ -130,7 +130,7 @@ app.patch(
       },
     },
   }),
-  jwt({ secret: process.env.JWT_SECRET!, cookie: 'token', alg: 'HS256' }),
+  authenticate,
   validator('json', UserUpdateSchema),
   async (c) => {
     const payload = c.get('jwtPayload') as { sub: number };

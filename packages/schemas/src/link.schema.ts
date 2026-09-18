@@ -24,3 +24,10 @@ export const LinkCreateSchema = v.object({
 });
 
 export type LinkCreate = v.InferInput<typeof LinkCreateSchema>;
+
+export const LinkUpdateSchema = v.object({
+  name: v.optional(LinkNameSchema),
+  url: v.optional(LinkUrlSchema),
+});
+
+export type LinkUpdate = v.InferInput<typeof LinkUpdateSchema>;
