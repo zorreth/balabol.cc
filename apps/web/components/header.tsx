@@ -13,12 +13,12 @@ const navItems = [
     href: '/',
   },
   {
-    name: 'Brand',
+    name: 'Brand Assets',
     href: '/about/brand',
   },
   {
-    name: 'Example',
-    href: '/about/example',
+    name: 'Open Source',
+    href: 'https://github.com/zorreth/balabol.cc',
   },
 ];
 
