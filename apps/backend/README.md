@@ -1,15 +1,9 @@
-# backend
+# apps/backend
 
-To install dependencies:
+Balabol.cc backend service
 
-```bash
-bun install
-```
+## Stack
 
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.4.0. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+- Hono
+- Drizzle ORM
+- Postgres database
