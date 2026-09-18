@@ -57,12 +57,16 @@ app.get(
       .limit(1);
 
     if (!user) {
+      // Replace the default size parameter =s96 with =s1024, providing larger avatar resolution.
+      const highResAvatar =
+        googleUser.picture?.replace(/=s\d+(-c)/, '=s1024') || googleUser.picture;
+
       const [createdUser] = await db
         .insert(users)
         .values({
           username: await getUniqueUsername(googleUser.name),
           displayName: googleUser.name,
-          avatarUrl: googleUser.picture,
+          avatarUrl: highResAvatar,
           provider: 'google',
           providerId: googleUser.id,
         })
@@ -108,7 +112,7 @@ app.get(
           username: await getUniqueUsername(discordUser.username),
           displayName: discordUser.global_name ?? discordUser.username,
           avatarUrl: discordUser.avatar
-            ? `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`
+            ? `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png?size=1024`
             : null,
           provider: 'discord',
           providerId: discordUser.id,
@@ -164,13 +168,21 @@ app.get(
       .limit(1);
 
     if (!user) {
+      let highResAvatar = githubUser.avatar_url;
+
+      if (highResAvatar) {
+        const url = new URL(highResAvatar);
+        url.searchParams.set('size', '1024');
+        highResAvatar = url.toString();
+      }
+
       const [createdUser] = await db
         .insert(users)
         .values({
           username: await getUniqueUsername(githubUser.login),
           displayName: githubUser.name ?? githubUser.login,
           bio: githubUser.bio,
-          avatarUrl: githubUser.avatar_url,
+          avatarUrl: highResAvatar,
           provider: 'github',
           providerId: String(githubUser.id),
         })
