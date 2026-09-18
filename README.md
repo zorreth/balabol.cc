@@ -6,6 +6,13 @@ Use the hosted version at [balabol.cc](https://balabol.cc) or self-host it yours
 
 **🚧 Currently under active development 🚧**
 
+## Stack
+
+This repository is a **monorepo**, using [Bun](https://bun.com) as the package manager and runtime.
+
+- **Backend** (apps/backend): Hono, Drizzle
+- **Frontend** (apps/web): Next.js, Tailwind, shadcn-ui
+
 ## Local Development
 
 1. Clone the repository:
@@ -17,7 +24,7 @@ Use the hosted version at [balabol.cc](https://balabol.cc) or self-host it yours
    ```bash
    bun install
    ```
-3. Set up environment variables for all apps:
+3. Set up environment variables:
    ```bash
    cp apps/backend/.env.example apps/backend/.env # change DATABASE_URL, JWT_SECRET, provider IDs and secrets, etc...
    cp apps/web/.env.example apps/web/.env
@@ -26,13 +33,6 @@ Use the hosted version at [balabol.cc](https://balabol.cc) or self-host it yours
    ```bash
    bun run dev
    ```
-
-## Stack
-
-This repository is a **monorepo**, using [Bun](https://bun.com) as the package manager and runtime.
-
-- **Backend** (apps/backend): Hono, Drizzle
-- **Frontend** (apps/web): Next.js, Tailwind, shadcn-ui
 
 ## Contribute
 
