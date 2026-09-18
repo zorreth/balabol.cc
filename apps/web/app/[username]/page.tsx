@@ -1,4 +1,7 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { ErrorMessage } from '@/components/error-message';
+import { fetchUserByUsername } from '@/lib/api';
 
 export async function generateMetadata({
   params,
@@ -20,9 +23,27 @@ export default async function Page({
 }) {
   const { username } = await params;
 
+  let user = null;
+
+  try {
+    user = await fetchUserByUsername(username);
+  } catch (error) {
+    console.error(error);
+
+    if (error instanceof Error) {
+      return <ErrorMessage>{error.message}</ErrorMessage>;
+    } else {
+      return <ErrorMessage>Unknown error</ErrorMessage>;
+    }
+  }
+
+  if (!user) {
+    return notFound();
+  }
+
   return (
     <div>
-      <h1>Hello, {username}!</h1>
+      <h1>Hello, {user.username}!</h1>
     </div>
   );
 }
