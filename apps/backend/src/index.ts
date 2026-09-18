@@ -29,7 +29,7 @@ app.get(
       info: {
         title: 'Balabol.cc API',
         version: '1.0.0',
-        description: 'The easiest social landing page hosting and link shortener',
+        description: 'The FOSS social landing page hosting',
       },
       servers: [
         {

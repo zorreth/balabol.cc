@@ -1,6 +1,6 @@
 # balabol.cc
 
-Social landing page hosting and link shortener. A free and open-source Linktree alternative.
+The social landing page hosting. A free and open-source Linktree alternative.
 
 Use the hosted version at [balabol.cc](https://balabol.cc) or self-host it yourself.
 
