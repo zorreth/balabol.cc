@@ -1,6 +1,6 @@
 # balabol.cc
 
-The social landing page hosting. A free and open-source Linktree alternative.
+A free and open-source link-in-bio platform.
 
 Use the hosted version at [balabol.cc](https://balabol.cc) or self-host it yourself.
 

@@ -29,7 +29,7 @@ app.get(
       info: {
         title: 'Balabol.cc API',
         version: '1.0.0',
-        description: 'The FOSS social landing page hosting',
+        description: 'A free and open-source link-in-bio platform.',
       },
       servers: [
         {
