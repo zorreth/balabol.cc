@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { fetchUserByUsername } from '@/lib/api';
 import { ErrorMessage } from '@/components/error-message';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 
 export async function generateMetadata({
   params,
@@ -29,13 +31,17 @@ export default async function Page({
   try {
     user = await fetchUserByUsername(username);
   } catch (error) {
-    console.error(error);
+    console.error('Failed to fetch user:', error);
 
-    if (error instanceof Error) {
-      return <ErrorMessage>{error.message}</ErrorMessage>;
-    } else {
-      return <ErrorMessage>Unknown error</ErrorMessage>;
-    }
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+
+    return (
+      <>
+        <Header />
+        <ErrorMessage>{errorMessage}</ErrorMessage>
+        <Footer />
+      </>
+    );
   }
 
   if (!user) {
