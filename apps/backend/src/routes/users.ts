@@ -29,7 +29,8 @@ await mkdir(AVATAR_DIR, { recursive: true });
 app.get(
   '/me',
   describeRoute({
-    description: "Get the current user's profile and links",
+    description: 'Get the current user profile',
+    tags: ['Users'],
     security: [{ cookieAuth: [] }, { bearerAuth: [] }],
     responses: {
       200: {
@@ -81,7 +82,8 @@ app.get(
 app.get(
   '/:username',
   describeRoute({
-    description: "Get user's profile and links by username",
+    description: 'Get the user profile by username',
+    tags: ['Users'],
     responses: {
       200: {
         description: 'Successfully retrieved user',
@@ -131,6 +133,7 @@ app.patch(
   '/me',
   describeRoute({
     description: 'Update the current user profile',
+    tags: ['Users'],
     security: [{ cookieAuth: [] }, { bearerAuth: [] }],
     responses: {
       200: {
@@ -182,6 +185,7 @@ app.post(
   '/me/avatar',
   describeRoute({
     description: 'Update the current user avatar',
+    tags: ['Users'],
     security: [{ cookieAuth: [] }, { bearerAuth: [] }],
     responses: {
       200: {

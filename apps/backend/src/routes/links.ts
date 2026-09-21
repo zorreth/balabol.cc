@@ -18,6 +18,7 @@ app.post(
   '/',
   describeRoute({
     description: 'Create a new link',
+    tags: ['Links'],
     security: [{ cookieAuth: [] }, { bearerAuth: [] }],
     responses: {
       201: {
@@ -74,6 +75,7 @@ app.delete(
   '/:id',
   describeRoute({
     description: 'Delete link by ID',
+    tags: ['Links'],
     responses: {
       204: {
         description: 'Successfully deleted link',
@@ -110,6 +112,7 @@ app.patch(
   '/:id',
   describeRoute({
     description: 'Update link by ID',
+    tags: ['Links'],
     security: [{ cookieAuth: [] }, { bearerAuth: [] }],
     responses: {
       200: {
