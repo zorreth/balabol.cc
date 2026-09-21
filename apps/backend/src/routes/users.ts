@@ -4,10 +4,27 @@ import { db } from '../db';
 import { users } from '../db/schema';
 import { eq } from 'drizzle-orm';
 import { describeRoute, resolver, validator } from 'hono-openapi';
-import { UserSchema, UserUpdateSchema, ErrorSchema } from '@repo/schemas';
+import {
+  UserSchema,
+  UserUpdateSchema,
+  ErrorSchema,
+  AvatarUpdateSchema,
+  UserBaseSchema,
+} from '@repo/schemas';
 import { authenticate } from '../../utils/authenticate';
+import { bodyLimit } from 'hono/body-limit';
+import { mkdir } from 'node:fs/promises';
 
 const app = new Hono();
+
+const extensions: Record<string, string> = {
+  'image/jpeg': 'jpg',
+  'image/png': 'png',
+};
+
+const AVATAR_DIR = './static/avatars';
+
+await mkdir(AVATAR_DIR, { recursive: true });
 
 app.get(
   '/me',
@@ -119,7 +136,7 @@ app.patch(
       200: {
         description: 'Successfully updated user',
         content: {
-          'application/json': { schema: resolver(UserSchema) },
+          'application/json': { schema: resolver(UserBaseSchema) },
         },
       },
       401: {
@@ -158,6 +175,71 @@ app.patch(
     }
 
     return c.json(updatedUser);
+  },
+);
+
+app.post(
+  '/me/avatar',
+  describeRoute({
+    description: 'Update the current user avatar',
+    security: [{ cookieAuth: [] }, { bearerAuth: [] }],
+    responses: {
+      200: {
+        description: 'Successfully updated user avatar',
+        content: {
+          'application/json': { schema: resolver(UserBaseSchema) },
+        },
+      },
+      401: {
+        description: 'Unauthorized',
+        content: {
+          'application/json': { schema: resolver(ErrorSchema) },
+        },
+      },
+    },
+  }),
+  bodyLimit({ maxSize: 1024 * 1024 * 5 }),
+  authenticate,
+  validator('form', AvatarUpdateSchema),
+  async (c) => {
+    const payload = c.get('jwtPayload') as { sub: number };
+    const userId = payload.sub;
+
+    const { avatar } = c.req.valid('form');
+
+    const extension = extensions[avatar.type] || 'png';
+
+    const filename = `${userId}.${extension}`;
+    const filepath = `${AVATAR_DIR}/${filename}`;
+
+    await Bun.write(filepath, avatar);
+
+    const url = `${process.env.BACKEND_URL}/static/avatars/${filename}`;
+
+    try {
+      const [updatedUser] = await db
+        .update(users)
+        .set({
+          avatarUrl: url,
+        })
+        .where(eq(users.id, userId))
+        .returning({
+          username: users.username,
+          displayName: users.displayName,
+          bio: users.bio,
+          avatarUrl: users.avatarUrl,
+        });
+
+      if (!updatedUser) {
+        throw new HTTPException(401, { message: 'User account no longer exists' });
+      }
+
+      return c.json(updatedUser);
+    } catch (error) {
+      await Bun.file(filepath).delete();
+
+      throw error;
+    }
   },
 );
 

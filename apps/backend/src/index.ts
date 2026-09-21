@@ -4,6 +4,7 @@ import { Scalar } from '@scalar/hono-api-reference';
 import { openAPIRouteHandler } from 'hono-openapi';
 import { logger } from 'hono/logger';
 import { cors } from 'hono/cors';
+import { serveStatic } from 'hono/bun';
 
 import auth from './routes/auth';
 import users from './routes/users';
@@ -66,6 +67,8 @@ app.get(
   '/docs',
   Scalar({ url: '/openapi', authentication: { preferredSecurityScheme: 'cookieAuth' } }),
 );
+
+app.use('/static/*', serveStatic({ root: './' }));
 
 const v1 = new Hono();
 

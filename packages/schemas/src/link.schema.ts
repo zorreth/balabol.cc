@@ -1,12 +1,12 @@
 import * as v from 'valibot';
 
-export const LinkNameSchema = v.pipe(
-  v.string(),
+const LinkNameSchema = v.pipe(
+  v.string('The link name must be string.'),
   v.maxLength(64, 'The maximum link name length is 64 characters.'),
 );
 
-export const LinkUrlSchema = v.pipe(
-  v.string(),
+const LinkUrlSchema = v.pipe(
+  v.string('The link URL must be string.'),
   v.url('The link URL is badly formatted.'),
 );
 
