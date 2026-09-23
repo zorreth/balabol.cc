@@ -1,8 +1,8 @@
 {
   "name": "balabol",
   "devDependencies": {
-    "prettier": "3.9.8",
-    "turbo": "^2.11.2",
+    "prettier": "3.9.9",
+    "turbo": "^2.11.3",
     "typescript": "^7.0.2"
   },
   "devEngines": {
