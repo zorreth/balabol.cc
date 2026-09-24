@@ -10,11 +10,33 @@ import { Switch } from '../ui/switch';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import { Field, FieldGroup, FieldSet, FieldLabel } from '../ui/field';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProfileView } from './profile-view';
 
 export function ProfileEdit({ user }: { user: User }) {
   const [isEdit, setIsEdit] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    setIsEdit(params.has('edit'));
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hasMounted) return;
+
+    const url = new URL(window.location.href);
+
+    if (isEdit) {
+      url.searchParams.set('edit', '1');
+    } else {
+      url.searchParams.delete('edit');
+    }
+
+    window.history.pushState({}, '', url);
+  }, [isEdit, hasMounted]);
 
   return (
     <>
@@ -32,7 +54,11 @@ export function ProfileEdit({ user }: { user: User }) {
           </Button>
 
           <div className="flex items-center gap-2">
-            <Switch id="edit-mode" onCheckedChange={setIsEdit} />
+            <Switch
+              id="edit-mode"
+              checked={isEdit}
+              onCheckedChange={setIsEdit}
+            />
             <Label htmlFor="edit-mode">Edit Mode</Label>
           </div>
         </div>
