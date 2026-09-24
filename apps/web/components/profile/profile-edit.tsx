@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { User } from '@repo/schemas';
-import { ChevronLeft, Share } from 'lucide-react';
+import { ChevronLeft, Share, SquarePen } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar';
 import { Button, buttonVariants } from '../ui/button';
 import { Label } from '../ui/label';
@@ -54,11 +54,7 @@ export function ProfileEdit({ user }: { user: User }) {
           </Button>
 
           <div className="flex items-center gap-2">
-            <Switch
-              id="edit-mode"
-              checked={isEdit}
-              onCheckedChange={setIsEdit}
-            />
+            <Switch id="edit-mode" checked={isEdit} onCheckedChange={setIsEdit} />
             <Label htmlFor="edit-mode">Edit Mode</Label>
           </div>
         </div>
@@ -66,9 +62,15 @@ export function ProfileEdit({ user }: { user: User }) {
 
       {isEdit ? (
         <main className="flex flex-col items-center py-8 px-2">
-          <Avatar size="xl" className="mb-4">
+          <Avatar size="xl" className="relative mb-4 hover:opacity-80 cursor-pointer group">
             <AvatarImage src={user.avatarUrl} />
             <AvatarFallback>{user.username.at(0)?.toUpperCase()}</AvatarFallback>
+
+            <SquarePen
+              className="absolute top-1/2 left-1/2 -translate-1/2 hidden group-hover:block"
+              color="white"
+              size={48}
+            />
           </Avatar>
 
           <FieldSet className="max-w-96 w-full">
