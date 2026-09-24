@@ -37,7 +37,7 @@ export function ProfileView({ user }: { user: User }) {
 
         <Image
           src="/logo.svg"
-          alt="logo"
+          alt="Logo"
           width={340}
           height={80}
           className="w-32 h-auto"

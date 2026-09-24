@@ -14,7 +14,11 @@ export async function UserMenu() {
 
   if (user) {
     return (
-      <Link href={`/${user.username}`} className="hover:scale-105 transition">
+      <Link
+        href={`/${user.username}`}
+        className="hover:scale-105 transition"
+        aria-label="User profile"
+      >
         <Avatar>
           <AvatarImage src={user.avatarUrl} />
           <AvatarFallback>{user.username.at(0)?.toUpperCase()}</AvatarFallback>

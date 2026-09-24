@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { getT } from 'next-i18next/server';
+import { LanguageSelect } from './language-select';
 
 const socials = [
   {
@@ -11,7 +13,9 @@ const socials = [
   },
 ];
 
-export function Footer() {
+export async function Footer() {
+  const { t } = await getT('footer');
+
   return (
     <footer className="px-4 py-12 bg-accent mt-auto">
       <div className="flex justify-between items-center container mx-auto gap-2 flex-col sm:flex-row">
@@ -20,11 +24,14 @@ export function Footer() {
             src="/logo.svg"
             width={340}
             height={80}
-            alt="logo"
+            alt="Logo"
             className="w-32 h-auto"
             loading="eager"
           />
-          <span>&copy; 2026 Kirill Siukhin. All rights reserved.</span>
+
+          <LanguageSelect />
+
+          <span>{t('copyright')}</span>
         </div>
 
         <div className="flex gap-4">

@@ -6,23 +6,26 @@ import { Button, buttonVariants } from './ui/button';
 import { Skeleton } from './ui/skeleton';
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from './ui/sheet';
 import { UserMenu } from './user-menu';
-
-const navItems = [
-  {
-    name: 'About',
-    href: '/',
-  },
-  {
-    name: 'Brand Assets',
-    href: '/about/brand',
-  },
-  {
-    name: 'Open Source',
-    href: 'https://github.com/zorreth/balabol.cc',
-  },
-];
+import { getT } from 'next-i18next/server';
 
 export async function Header() {
+  const { t } = await getT('header');
+
+  const navItems = [
+    {
+      name: t('about'),
+      href: '/',
+    },
+    {
+      name: t('brand'),
+      href: '/about/brand',
+    },
+    {
+      name: t('opensource'),
+      href: 'https://github.com/zorreth/balabol.cc',
+    },
+  ];
+
   return (
     <header className="container mx-auto p-4 flex justify-between items-center">
       <Sheet>
@@ -53,7 +56,7 @@ export async function Header() {
           src="/logo.svg"
           width={340}
           height={80}
-          alt="logo"
+          alt="Logo"
           className="hover:scale-105 transition w-36 h-auto"
           loading="eager"
         />
