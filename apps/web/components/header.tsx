@@ -6,10 +6,10 @@ import { Button, buttonVariants } from './ui/button';
 import { Skeleton } from './ui/skeleton';
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from './ui/sheet';
 import { UserMenu } from './user-menu';
-import { getT } from 'next-i18next/server';
+import { getTranslations } from 'next-intl/server';
 
 export async function Header() {
-  const { t } = await getT('header');
+  const t = await getTranslations('Header');
 
   const navItems = [
     {

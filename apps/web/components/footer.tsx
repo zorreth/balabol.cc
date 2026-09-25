@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { getT } from 'next-i18next/server';
 import { LanguageSelect } from './language-select';
+import { getTranslations } from 'next-intl/server';
 
 const socials = [
   {
@@ -14,7 +14,7 @@ const socials = [
 ];
 
 export async function Footer() {
-  const { t } = await getT('footer');
+  const t = await getTranslations('Footer');
 
   return (
     <footer className="px-4 py-12 bg-accent mt-auto">
