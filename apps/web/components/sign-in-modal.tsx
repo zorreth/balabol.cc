@@ -12,22 +12,25 @@ import { buttonVariants } from './ui/button';
 import { GitHub } from './icons/github';
 import { Discord } from './icons/discord';
 import { Google } from './icons/google';
+import { getTranslations } from 'next-intl/server';
 
-export function SignInModal() {
+export async function SignInModal() {
+  const t = await getTranslations('SignInModal');
+
   return (
     <Dialog>
-      <DialogTrigger render={<Button size="lg" />}>Sign In</DialogTrigger>
+      <DialogTrigger render={<Button size="lg" />}>{t('buttonText')}</DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="text-center text-xl font-semibold">
-            Sign into Balabol.cc
+            {t('title')}
           </DialogTitle>
 
           <DialogDescription className="text-center">
-            Make your own profile in seconds.
-            <br />
-            Sign in using one of the OAuth2 providers:
+            {t.rich('description', {
+              br: () => <br />,
+            })}
           </DialogDescription>
         </DialogHeader>
 
@@ -39,7 +42,7 @@ export function SignInModal() {
               'bg-[#5865F2] hover:bg-[#5865F2] text-base h-12 gap-3',
             )}
           >
-            <Discord /> Sign in with Discord
+            <Discord /> {t('signinDiscord')}
           </a>
 
           <a
@@ -49,7 +52,7 @@ export function SignInModal() {
               'bg-black hover:bg-black text-base h-12 gap-3',
             )}
           >
-            <GitHub /> Sign in with GitHub
+            <GitHub /> {t('signinGithub')}
           </a>
 
           <a
@@ -59,14 +62,11 @@ export function SignInModal() {
               'bg-[#4285F4] hover:bg-[#4285F4] text-base h-12 gap-3',
             )}
           >
-            <Google /> Sign in with Google
+            <Google /> {t('signinGoogle')}
           </a>
         </div>
 
-        <span className="text-center text-xs text-muted-foreground">
-          The initial profile information will be retrieved from the selected provider.
-          You&apos;ll be able to change it anytime.
-        </span>
+        <span className="text-center text-xs text-muted-foreground">{t('footer')}</span>
       </DialogContent>
     </Dialog>
   );

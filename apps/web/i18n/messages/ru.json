@@ -13,5 +13,14 @@
     "twemojiLicense": "Логотип и иконка Balabol.cc используют <twemoji>Twemoji</twemoji>, который распространяется под лицензией <license>CC-BY 4.0</license>.",
     "downloadLogo": "Скачать логотип",
     "downloadIcon": "Скачать иконку"
+  },
+  "SignInModal": {
+    "buttonText": "Войти",
+    "title": "Войти в Balabol.cc",
+    "description": "Создайте свой профиль за считанные секунды.<br></br>Войдите, используя OAuth2:",
+    "signinDiscord": "Войти через Discord",
+    "signinGithub": "Войти через GitHub",
+    "signinGoogle": "Войти через Google",
+    "footer": "Ваш профиль сформируется, используя информацию от выбранного провайдера. Вы сможете изменить его в любой момент."
   }
 }

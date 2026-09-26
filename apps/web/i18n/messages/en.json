@@ -13,5 +13,14 @@
     "twemojiLicense": "Both the logo and the icon use graphics from <twemoji>Twemoji</twemoji>, licensed under <license>CC-BY 4.0</license>.",
     "downloadLogo": "Download Logo",
     "downloadIcon": "Download Icon"
+  },
+  "SignInModal": {
+    "buttonText": "Sign In",
+    "title": "Sign into Balabol.cc",
+    "description": "Make your own profile in seconds.<br></br>Sign in using one of the OAuth2 providers:",
+    "signinDiscord": "Sign in with Discord",
+    "signinGithub": "Sign in with GitHub",
+    "signinGoogle": "Sign in with Google",
+    "footer": "The initial profile information will be retrieved from the selected provider. You'll be able to change it anytime."
   }
 }
