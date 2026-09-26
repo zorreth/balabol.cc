@@ -1,4 +1,4 @@
-# balabol.cc
+# 😎 balabol.cc
 
 A free and open-source link-in-bio platform.
 
