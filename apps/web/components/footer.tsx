@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { LanguageSelect } from './language-select';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 const socials = [
   {
@@ -15,6 +15,7 @@ const socials = [
 
 export async function Footer() {
   const t = await getTranslations('Footer');
+  const locale = await getLocale();
 
   return (
     <footer className="px-4 py-12 bg-accent mt-auto">
@@ -29,7 +30,7 @@ export async function Footer() {
             loading="eager"
           />
 
-          <LanguageSelect />
+          <LanguageSelect currentLocale={locale} />
 
           <span>{t('copyright')}</span>
         </div>

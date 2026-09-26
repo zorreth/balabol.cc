@@ -1,6 +1,6 @@
 'use client';
 
-import { useChangeLanguage } from 'next-i18next/client';
+import { setUserLocale } from '@/app/actions/locale';
 import {
   Select,
   SelectContent,
@@ -9,23 +9,34 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select';
-import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/navigation';
+import { useTransition } from 'react';
 
 const langs = [
   { label: '🇬🇧 English', value: 'en' },
   { label: '🇷🇺 Русский', value: 'ru' },
 ];
 
-export function LanguageSelect() {
-  const changeLanguage = useChangeLanguage();
-  const { i18n } = useTranslation();
+export function LanguageSelect({ currentLocale }: { currentLocale?: string }) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
-  const handleChange = async (lang: string | null) => {
-    if (lang) await changeLanguage(lang);
+  const handleChange = (lang: string | null) => {
+    if (!lang) return;
+
+    startTransition(async () => {
+      await setUserLocale(lang);
+      router.refresh();
+    });
   };
 
   return (
-    <Select items={langs} onValueChange={handleChange} value={i18n.language}>
+    <Select
+      items={langs}
+      value={currentLocale || 'en'}
+      onValueChange={handleChange}
+      disabled={isPending}
+    >
       <SelectTrigger className="w-64">
         <SelectValue placeholder="Select language..." />
       </SelectTrigger>
