@@ -7,7 +7,7 @@ export default async function Page({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   const { cause } = await searchParams;
-  const t = await getTranslations('Error');
+  const t = await getTranslations('ErrorPage');
 
   let message = 'Something went wrong!';
 

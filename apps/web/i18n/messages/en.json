@@ -8,6 +8,7 @@
     "copyright": "© 2026 Kirill Siukhin. All rights reserved."
   },
   "BrandPage": {
+    "pageTitle": "Brand Assets - Balabol.cc",
     "title": "Brand Assets",
     "logoLicense": "The Balabol.cc logo and the icon are licensed under <license>CC-BY 4.0</license>.",
     "twemojiLicense": "Both the logo and the icon use graphics from <twemoji>Twemoji</twemoji>, licensed under <license>CC-BY 4.0</license>.",
@@ -17,18 +18,19 @@
   "SignInModal": {
     "buttonText": "Sign In",
     "title": "Sign into Balabol.cc",
-    "description": "Make your own profile in seconds.<br></br>Sign in using one of the OAuth2 providers:",
-    "signinDiscord": "Sign in with Discord",
-    "signinGithub": "Sign in with GitHub",
-    "signinGoogle": "Sign in with Google",
+    "description": "Make your own profile in seconds.<br />Sign in using one of the OAuth2 providers:",
+    "discord": "Sign in with Discord",
+    "github": "Sign in with GitHub",
+    "google": "Sign in with Google",
     "footer": "The initial profile information will be retrieved from the selected provider. You'll be able to change it anytime."
   },
-  "NotFound": {
+  "NotFoundPage": {
+    "pageTitle": "404 Not Found - Balabol.cc",
     "title": "404 Not Found",
     "desc1": "This page cannot be found.",
     "desc2": "Please, <issue>leave an issue</issue> if you think there was a mistake."
   },
-  "Error": {
+  "ErrorPage": {
     "title": "Oh no! Error!",
     "provider": "Failed to request user data from the OAuth2 provider.",
     "server": "Failed to create a new user."

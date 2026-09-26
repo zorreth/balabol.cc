@@ -42,7 +42,7 @@ export async function SignInModal() {
               'bg-[#5865F2] hover:bg-[#5865F2] text-base h-12 gap-3',
             )}
           >
-            <Discord /> {t('signinDiscord')}
+            <Discord /> {t('discord')}
           </a>
 
           <a
@@ -52,7 +52,7 @@ export async function SignInModal() {
               'bg-black hover:bg-black text-base h-12 gap-3',
             )}
           >
-            <GitHub /> {t('signinGithub')}
+            <GitHub /> {t('github')}
           </a>
 
           <a
@@ -62,7 +62,7 @@ export async function SignInModal() {
               'bg-[#4285F4] hover:bg-[#4285F4] text-base h-12 gap-3',
             )}
           >
-            <Google /> {t('signinGoogle')}
+            <Google /> {t('google')}
           </a>
         </div>
 

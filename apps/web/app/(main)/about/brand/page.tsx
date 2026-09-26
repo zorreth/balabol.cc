@@ -3,10 +3,13 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 
-export const metadata: Metadata = {
-  title: 'Brand Assets - Balabol.cc',
-  description: 'The official Balabol.cc logos and icons that are available to download',
-};
+export async function generateMetadata() {
+  const t = await getTranslations('BrandPage');
+
+  return {
+    title: t('pageTitle'),
+  } as Metadata;
+}
 
 export default async function Page() {
   const t = await getTranslations('BrandPage');

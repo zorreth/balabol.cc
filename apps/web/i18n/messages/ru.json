@@ -8,6 +8,7 @@
     "copyright": "© 2026 Кирилл Сиухин. Все права защищены."
   },
   "BrandPage": {
+    "pageTitle": "Бренд - Balabol.cc",
     "title": "Бренд",
     "logoLicense": "Логотип и иконка Balabol.cc распространяются под лицензией <license>CC-BY 4.0</license>.",
     "twemojiLicense": "Логотип и иконка Balabol.cc используют <twemoji>Twemoji</twemoji>, который распространяется под лицензией <license>CC-BY 4.0</license>.",
@@ -17,18 +18,19 @@
   "SignInModal": {
     "buttonText": "Войти",
     "title": "Войти в Balabol.cc",
-    "description": "Создайте свой профиль за считанные секунды.<br></br>Войдите, используя OAuth2:",
-    "signinDiscord": "Войти через Discord",
-    "signinGithub": "Войти через GitHub",
-    "signinGoogle": "Войти через Google",
+    "description": "Создайте свой профиль за считанные секунды.<br />Войдите, используя OAuth2:",
+    "discord": "Войти через Discord",
+    "github": "Войти через GitHub",
+    "google": "Войти через Google",
     "footer": "Ваш профиль сформируется, используя информацию от выбранного провайдера. Вы сможете изменить его в любой момент."
   },
-  "NotFound": {
+  "NotFoundPage": {
+    "pageTitle": "404 Not Found - Balabol.cc",
     "title": "404 Not Found",
     "desc1": "Данная страница не найдена.",
     "desc2": "Пожалуйста, <issue>оставьте issue</issue>, если вы думаете, что что-то не так."
   },
-  "Error": {
+  "ErrorPage": {
     "title": "О нет! Ошибка!",
     "provider": "Не удалось получить данные от провайдера OAuth2.",
     "server": "Не удалось создать пользователя."

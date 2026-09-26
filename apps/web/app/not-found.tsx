@@ -4,12 +4,16 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { getTranslations } from 'next-intl/server';
 
-export const metadata: Metadata = {
-  title: 'Not Found - Balabol.cc',
-};
+export async function generateMetadata() {
+  const t = await getTranslations('NotFoundPage');
+
+  return {
+    title: t('pageTitle'),
+  } as Metadata;
+}
 
 export default async function NotFound() {
-  const t = await getTranslations('NotFound');
+  const t = await getTranslations('NotFoundPage');
 
   return (
     <>
