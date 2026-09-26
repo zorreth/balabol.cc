@@ -1,5 +1,6 @@
 import { buttonVariants } from '@/components/ui/button';
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
@@ -7,41 +8,48 @@ export const metadata: Metadata = {
   description: 'The official Balabol.cc logos and icons that are available to download',
 };
 
-export default function Page() {
+export default async function Page() {
+  const t = await getTranslations('BrandPage');
+
   return (
     <div className="flex flex-col items-center text-center p-8">
-      <h1 className="font-bold text-3xl mb-4">Brand Assets</h1>
+      <h1 className="font-bold text-3xl mb-4">{t('title')}</h1>
 
       <p>
-        The Balabol.cc logo and the icon are licensed under{' '}
-        <a
-          href="https://creativecommons.org/licenses/by/4.0/"
-          target="_blank"
-          className="font-semibold hover:underline"
-        >
-          CC-BY 4.0
-        </a>
-        .
+        {t.rich('logoLicense', {
+          license: (chunks) => (
+            <a
+              href="https://creativecommons.org/licenses/by/4.0/"
+              target="_blank"
+              className="font-semibold hover:underline"
+            >
+              {chunks}
+            </a>
+          ),
+        })}
       </p>
 
       <p className="mb-8">
-        Both the logo and the icon use graphics from{' '}
-        <a
-          href="https://github.com/twitter/twemoji"
-          target="_blank"
-          className="font-semibold hover:underline"
-        >
-          Twemoji
-        </a>
-        , licensed under{' '}
-        <a
-          href="https://creativecommons.org/licenses/by/4.0/"
-          target="_blank"
-          className="font-semibold hover:underline"
-        >
-          CC-BY 4.0
-        </a>
-        .
+        {t.rich('twemojiLicense', {
+          twemoji: (chunks) => (
+            <a
+              href="https://github.com/twitter/twemoji"
+              target="_blank"
+              className="font-semibold hover:underline"
+            >
+              {chunks}
+            </a>
+          ),
+          license: (chunks) => (
+            <a
+              href="https://creativecommons.org/licenses/by/4.0/"
+              target="_blank"
+              className="font-semibold hover:underline"
+            >
+              {chunks}
+            </a>
+          ),
+        })}
       </p>
 
       <div className="flex flex-col md:flex-row gap-8">
@@ -52,7 +60,7 @@ export default function Page() {
             className={buttonVariants({ variant: 'default', size: 'default' })}
             download="balabol-logo.svg"
           >
-            Download Logo
+            {t('downloadLogo')}
           </a>
         </div>
 
@@ -63,7 +71,7 @@ export default function Page() {
             className={buttonVariants({ variant: 'default', size: 'default' })}
             download="balabol-icon.svg"
           >
-            Download Icon
+            {t('downloadIcon')}
           </a>
         </div>
       </div>
