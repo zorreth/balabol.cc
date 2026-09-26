@@ -22,5 +22,15 @@
     "signinGithub": "Sign in with GitHub",
     "signinGoogle": "Sign in with Google",
     "footer": "The initial profile information will be retrieved from the selected provider. You'll be able to change it anytime."
+  },
+  "NotFound": {
+    "title": "404 Not Found",
+    "desc1": "This page cannot be found.",
+    "desc2": "Please, <issue>leave an issue</issue> if you think there was a mistake."
+  },
+  "Error": {
+    "title": "Oh no! Error!",
+    "provider": "Failed to request user data from the OAuth2 provider.",
+    "server": "Failed to create a new user."
   }
 }

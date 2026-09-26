@@ -1,4 +1,5 @@
 import { ErrorMessage } from '@/components/error-message';
+import { getTranslations } from 'next-intl/server';
 
 export default async function Page({
   searchParams,
@@ -6,17 +7,17 @@ export default async function Page({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   const { cause } = await searchParams;
+  const t = await getTranslations('Error');
 
   let message = 'Something went wrong!';
 
   switch (cause) {
     case 'provider':
-      message =
-        'Failed to request user data from the OAuth2 provider! Please, try again.';
+      message = t('provider');
       break;
 
     case 'server':
-      message = 'Failed to create a new user. Please, try again.';
+      message = t('server');
       break;
   }
 
