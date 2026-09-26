@@ -62,7 +62,10 @@ export function ProfileEdit({ user }: { user: User }) {
 
       {isEdit ? (
         <main className="flex flex-col items-center py-8 px-2">
-          <Avatar size="xl" className="relative mb-4 hover:opacity-80 cursor-pointer group">
+          <Avatar
+            size="xl"
+            className="relative mb-4 hover:opacity-80 cursor-pointer group"
+          >
             <AvatarImage src={user.avatarUrl} />
             <AvatarFallback>{user.username.at(0)?.toUpperCase()}</AvatarFallback>
 

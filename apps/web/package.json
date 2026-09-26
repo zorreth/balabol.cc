@@ -9,12 +9,15 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@repo/schemas": "workspace:*",
     "@base-ui/react": "^1.8.0",
+    "@formatjs/intl-localematcher": "^0.9.0",
+    "@repo/schemas": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.4.0",
-    "lucide-react": "^1.47.0",
+    "lucide-react": "^1.48.0",
+    "negotiator": "^1.1.0",
     "next": "16.3.6",
+    "next-intl": "^4.14.7",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "shadcn": "^4.21.0",
@@ -23,6 +26,7 @@
   "devDependencies": {
     "@repo/tsconfig": "workspace:*",
     "@tailwindcss/postcss": "^4.3.3",
+    "@types/negotiator": "^0.6.5",
     "@types/node": "^26.6.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
