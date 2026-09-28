@@ -34,5 +34,14 @@
     "title": "Oh no! Error!",
     "provider": "Failed to request user data from the OAuth2 provider.",
     "server": "Failed to create a new user."
+  },
+  "Profile": {
+    "editMode": "Edit Mode",
+    "poweredBy": "POWERED BY",
+    "update": "Update",
+    "displayName": "Display Name",
+    "displayNamePlaceholder": "Cool Dude",
+    "bio": "Bio",
+    "bioPlaceholder": "The best Software Engeneer in the world from the Gotham City"
   }
 }

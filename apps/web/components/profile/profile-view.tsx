@@ -1,4 +1,5 @@
 import { User } from '@repo/schemas';
+import { useTranslations } from 'next-intl';
 import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar';
 import { buttonVariants } from '../ui/button';
 import { cn } from 'cn';
@@ -6,6 +7,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export function ProfileView({ user }: { user: User }) {
+  const t = useTranslations('Profile');
+
   return (
     <main className="flex flex-col items-center py-8 px-2">
       <Avatar size="xl" className="mb-4">
@@ -33,7 +36,7 @@ export function ProfileView({ user }: { user: User }) {
       </div>
 
       <Link href="/" className="flex flex-col items-center transition hover:scale-105">
-        <span className="text-xs tracking-wide font-bold">POWERED BY</span>
+        <span className="text-xs tracking-wide font-bold">{t('poweredBy')}</span>
 
         <Image
           src="/logo.svg"

@@ -12,10 +12,13 @@ import { Textarea } from '../ui/textarea';
 import { Field, FieldGroup, FieldSet, FieldLabel } from '../ui/field';
 import { useEffect, useState } from 'react';
 import { ProfileView } from './profile-view';
+import { useTranslations } from 'next-intl';
 
 export function ProfileEdit({ user }: { user: User }) {
   const [isEdit, setIsEdit] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
+
+  const t = useTranslations('Profile');
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -55,7 +58,7 @@ export function ProfileEdit({ user }: { user: User }) {
 
           <div className="flex items-center gap-2">
             <Switch id="edit-mode" checked={isEdit} onCheckedChange={setIsEdit} />
-            <Label htmlFor="edit-mode">Edit Mode</Label>
+            <Label htmlFor="edit-mode">{t('editMode')}</Label>
           </div>
         </div>
       </header>
@@ -79,28 +82,28 @@ export function ProfileEdit({ user }: { user: User }) {
           <FieldSet className="max-w-96 w-full">
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="display-name">Display Name</FieldLabel>
+                <FieldLabel htmlFor="display-name">{t('displayName')}</FieldLabel>
                 <Input
                   defaultValue={user.displayName || user.username}
                   id="display-name"
-                  placeholder="Cool Balabol"
+                  placeholder={t('displayNamePlaceholder')}
                   className="text-center font-bold"
                 />
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="bio">Bio</FieldLabel>
+                <FieldLabel htmlFor="bio">{t('bio')}</FieldLabel>
                 <Textarea
                   defaultValue={user.bio}
                   id="bio"
-                  placeholder="My name is Balabol, I live at balabol.cc, my phone is Nokia 3310, my credit card number is ..."
+                  placeholder={t('bioPlaceholder')}
                 />
               </Field>
             </FieldGroup>
 
             <FieldGroup>
               <Field>
-                <Button>Update</Button>
+                <Button>{t('update')}</Button>
               </Field>
             </FieldGroup>
           </FieldSet>
