@@ -8,10 +8,10 @@ import { and, eq } from 'drizzle-orm';
 import { sign } from 'hono/jwt';
 import { setCookie } from 'hono/cookie';
 import {
-  parseConnections,
+  parseDiscordConnections,
   type DiscordConnection,
 } from '../../utils/discord-connections';
-import { getUniqueUsername } from '../../utils/username';
+import { getUniqueUsername } from '../../utils/getUniqueUsername';
 
 const app = new Hono();
 
@@ -134,7 +134,7 @@ app.get(
 
         const connections = (await res.json()) as DiscordConnection[];
 
-        await db.insert(links).values(parseConnections(connections, user.id));
+        await db.insert(links).values(parseDiscordConnections(connections, user.id));
       } catch (err) {
         console.warn('Failed to fetch Discord connections:', err);
       }

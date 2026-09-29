@@ -23,7 +23,7 @@ export type DiscordConnection = {
   visibility: number;
 };
 
-export function parseConnections(
+export function parseDiscordConnections(
   connections: DiscordConnection[],
   userId: number,
 ): (typeof links.$inferInsert)[] {
