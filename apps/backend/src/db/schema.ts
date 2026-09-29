@@ -16,6 +16,7 @@ export const links = pgTable('links', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   name: varchar({ length: 64 }).notNull(),
   url: varchar().notNull(),
+  order: integer().notNull().default(1),
   userId: integer('user_id')
     .notNull()
     .references(() => users.id),

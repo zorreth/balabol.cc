@@ -1,0 +1,1 @@
+ALTER TABLE "links" ADD COLUMN "order" integer DEFAULT 1 NOT NULL;

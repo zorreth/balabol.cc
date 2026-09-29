@@ -14,6 +14,7 @@ export const LinkSchema = v.object({
   id: v.number(),
   name: LinkNameSchema,
   url: LinkUrlSchema,
+  order: v.number(),
 });
 
 export type Link = v.InferInput<typeof LinkSchema>;
@@ -21,6 +22,7 @@ export type Link = v.InferInput<typeof LinkSchema>;
 export const LinkCreateSchema = v.object({
   name: LinkNameSchema,
   url: LinkUrlSchema,
+  order: v.number(),
 });
 
 export type LinkCreate = v.InferInput<typeof LinkCreateSchema>;
@@ -28,6 +30,7 @@ export type LinkCreate = v.InferInput<typeof LinkCreateSchema>;
 export const LinkUpdateSchema = v.object({
   name: v.optional(LinkNameSchema),
   url: v.optional(LinkUrlSchema),
+  order: v.optional(v.number()),
 });
 
 export type LinkUpdate = v.InferInput<typeof LinkUpdateSchema>;

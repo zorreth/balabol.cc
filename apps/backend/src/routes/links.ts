@@ -49,12 +49,14 @@ app.post(
         .values({
           name: body.name,
           url: body.url,
+          order: body.order,
           userId,
         })
         .returning({
           id: links.id,
           name: links.name,
           url: links.url,
+          order: links.order,
         });
 
       return c.json(link, 201);
@@ -155,12 +157,14 @@ app.patch(
       .set({
         name: body.name,
         url: body.url,
+        order: body.order,
       })
       .where(and(eq(links.id, linkId), eq(links.userId, userId)))
       .returning({
         id: links.id,
         name: links.name,
         url: links.url,
+        order: links.order,
       });
 
     if (!updatedLink) {
