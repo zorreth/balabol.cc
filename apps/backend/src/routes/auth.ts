@@ -10,7 +10,7 @@ import { setCookie } from 'hono/cookie';
 import {
   parseDiscordConnections,
   type DiscordConnection,
-} from '../../utils/discord-connections';
+} from '../../utils/parseDiscordConnections';
 import { getUniqueUsername } from '../../utils/getUniqueUsername';
 
 const app = new Hono();
