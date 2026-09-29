@@ -41,7 +41,9 @@
     "update": "Update",
     "displayName": "Display Name",
     "displayNamePlaceholder": "Cool Dude",
+    "username": "Username",
+    "usernamePlaceholder": "cool_dude",
     "bio": "Bio",
-    "bioPlaceholder": "The best Software Engeneer in the world from the Gotham City"
+    "bioPlaceholder": "The best Software Engeneer in the world"
   }
 }

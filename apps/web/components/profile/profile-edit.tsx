@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { User } from '@repo/schemas';
+import { User, UserUpdateSchema } from '@repo/schemas';
 import { ChevronLeft, Share, SquarePen } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar';
 import { Button, buttonVariants } from '../ui/button';
@@ -9,14 +9,26 @@ import { Label } from '../ui/label';
 import { Switch } from '../ui/switch';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
-import { Field, FieldGroup, FieldSet, FieldLabel } from '../ui/field';
+import { Field, FieldGroup, FieldSet, FieldLabel, FieldError } from '../ui/field';
 import { useEffect, useState } from 'react';
 import { ProfileView } from './profile-view';
 import { useTranslations } from 'next-intl';
+import { Controller, useForm } from 'react-hook-form';
+import { valibotResolver } from '@hookform/resolvers/valibot';
+import { updateUserAction } from '@/app/actions/user';
 
 export function ProfileEdit({ user }: { user: User }) {
   const [isEdit, setIsEdit] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
+
+  const { control, handleSubmit } = useForm({
+    resolver: valibotResolver(UserUpdateSchema),
+    defaultValues: {
+      username: user.username,
+      displayName: user.displayName || user.username,
+      bio: user.bio ?? '',
+    },
+  });
 
   const t = useTranslations('Profile');
 
@@ -40,6 +52,14 @@ export function ProfileEdit({ user }: { user: User }) {
 
     window.history.pushState({}, '', url);
   }, [isEdit, hasMounted]);
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      await updateUserAction(data);
+    } catch (error) {
+      console.log(error);
+    }
+  });
 
   return (
     <>
@@ -79,34 +99,69 @@ export function ProfileEdit({ user }: { user: User }) {
             />
           </Avatar>
 
-          <FieldSet className="max-w-96 w-full">
-            <FieldGroup>
-              <Field>
-                <FieldLabel htmlFor="display-name">{t('displayName')}</FieldLabel>
-                <Input
-                  defaultValue={user.displayName || user.username}
-                  id="display-name"
-                  placeholder={t('displayNamePlaceholder')}
-                  className="text-center font-bold"
+          <form onSubmit={onSubmit} className="max-w-96 w-full">
+            <FieldSet>
+              <FieldGroup>
+                <Controller
+                  name="displayName"
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <Field>
+                      <FieldLabel htmlFor={field.name}>{t('displayName')}</FieldLabel>
+                      <Input
+                        {...field}
+                        id={field.name}
+                        aria-invalid={fieldState.invalid}
+                        placeholder={t('displayNamePlaceholder')}
+                        className="text-center font-bold"
+                        autoComplete="off"
+                      />
+                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                    </Field>
+                  )}
                 />
-              </Field>
 
-              <Field>
-                <FieldLabel htmlFor="bio">{t('bio')}</FieldLabel>
-                <Textarea
-                  defaultValue={user.bio}
-                  id="bio"
-                  placeholder={t('bioPlaceholder')}
+                <Controller
+                  name="username"
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <Field>
+                      <FieldLabel htmlFor={field.name}>{t('username')}</FieldLabel>
+                      <Input
+                        {...field}
+                        id={field.name}
+                        aria-invalid={fieldState.invalid}
+                        placeholder={t('usernamePlaceholder')}
+                        autoComplete="off"
+                      />
+                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                    </Field>
+                  )}
                 />
-              </Field>
-            </FieldGroup>
 
-            <FieldGroup>
-              <Field>
-                <Button>{t('update')}</Button>
-              </Field>
-            </FieldGroup>
-          </FieldSet>
+                <Controller
+                  name="bio"
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <Field>
+                      <FieldLabel htmlFor={field.name}>{t('bio')}</FieldLabel>
+                      <Textarea
+                        {...field}
+                        id={field.name}
+                        aria-invalid={fieldState.invalid}
+                        placeholder={t('bioPlaceholder')}
+                      />
+                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                    </Field>
+                  )}
+                />
+              </FieldGroup>
+
+              <FieldGroup>
+                <Button type="submit">{t('update')}</Button>
+              </FieldGroup>
+            </FieldSet>
+          </form>
         </main>
       ) : (
         <ProfileView user={user} />

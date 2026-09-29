@@ -41,7 +41,9 @@
     "update": "Обновить",
     "displayName": "Отображаемое имя",
     "displayNamePlaceholder": "Крутой Чувак",
+    "username": "Имя пользователя",
+    "usernamePlaceholder": "cool_dude",
     "bio": "Био",
-    "bioPlaceholder": "Лучший в мире разработчик приложений из Готэма"
+    "bioPlaceholder": "Лучший в мире разработчик мобильных приложений"
   }
 }
