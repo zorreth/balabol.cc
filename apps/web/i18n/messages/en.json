@@ -18,7 +18,7 @@
   "SignInModal": {
     "buttonText": "Sign In",
     "title": "Sign into Balabol.cc",
-    "description": "Make your own profile in seconds.<br />Sign in using one of the OAuth2 providers:",
+    "description": "Make your own profile in seconds.<br></br>Sign in using one of the OAuth2 providers:",
     "discord": "Sign in with Discord",
     "github": "Sign in with GitHub",
     "google": "Sign in with Google",
@@ -44,6 +44,6 @@
     "username": "Username",
     "usernamePlaceholder": "cool_dude",
     "bio": "Bio",
-    "bioPlaceholder": "The best Software Engeneer in the world"
+    "bioPlaceholder": "The best mobile developer in the world"
   }
 }

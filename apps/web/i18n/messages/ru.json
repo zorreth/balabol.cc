@@ -18,7 +18,7 @@
   "SignInModal": {
     "buttonText": "Войти",
     "title": "Войти в Balabol.cc",
-    "description": "Создайте свой профиль за считанные секунды.<br />Войдите, используя OAuth2:",
+    "description": "Создайте свой профиль за считанные секунды.<br></br>Войдите, используя OAuth2:",
     "discord": "Войти через Discord",
     "github": "Войти через GitHub",
     "google": "Войти через Google",
