@@ -1,6 +1,7 @@
 {
   "name": "balabol",
   "devDependencies": {
+    "drizzle-kit": "^1.0.0-rc.5-ab785fc",
     "prettier": "3.9.10",
     "turbo": "^2.11.10",
     "typescript": "^7.0.2"
@@ -17,7 +18,8 @@
   "private": true,
   "scripts": {
     "dev": "turbo run dev",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:migrate": "cd ./apps/backend && drizzle-kit migrate"
   },
   "workspaces": [
     "apps/*",
