@@ -2,8 +2,8 @@
   "name": "balabol",
   "devDependencies": {
     "drizzle-kit": "^1.0.0-rc.5-ab785fc",
-    "prettier": "3.9.10",
-    "turbo": "^2.11.10",
+    "prettier": "3.10.1",
+    "turbo": "^2.11.13",
     "typescript": "^7.0.2"
   },
   "devEngines": {
