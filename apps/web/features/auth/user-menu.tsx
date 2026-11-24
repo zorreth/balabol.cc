@@ -1,7 +1,9 @@
 import Link from 'next/link';
-import { fetchCurrentUser } from '@/lib/api';
-import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar';
+
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+
 import { SignInModal } from './sign-in-modal';
+import { fetchCurrentUser } from './api';
 
 export async function UserMenu() {
   let user = null;

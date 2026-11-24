@@ -1,32 +1,5 @@
-import { ErrorResponse, User, UserBase, UserUpdate } from '@repo/schemas';
 import { cookies } from 'next/headers';
-
-export async function fetchCurrentUser(): Promise<User | null> {
-  const cookieStore = await cookies();
-  const token = cookieStore.get('token')?.value;
-
-  if (!token) {
-    return null;
-  }
-
-  const res = await fetch(`${process.env.BACKEND_URL}/v1/users/me`, {
-    method: 'GET',
-    headers: {
-      Cookie: `token=${token}`,
-    },
-  });
-
-  if (!res.ok) {
-    if (res.status === 401) {
-      return null;
-    }
-
-    const json = (await res.json()) as ErrorResponse;
-    throw new Error(json.message);
-  }
-
-  return (await res.json()) as User;
-}
+import type { ErrorResponse, User, UserBase, UserUpdate } from '@repo/schemas';
 
 export async function fetchUserByUsername(username: string): Promise<User | null> {
   const res = await fetch(
@@ -62,10 +35,11 @@ export async function updateUser(newUser: UserUpdate): Promise<UserBase> {
     body: JSON.stringify(newUser),
   });
 
+  const json = await res.json();
+
   if (!res.ok) {
-    const json = (await res.json()) as ErrorResponse;
-    throw new Error(json.message);
+    throw new Error((json as ErrorResponse).message);
   }
 
-  return (await res.json()) as UserBase;
+  return json as UserBase;
 }

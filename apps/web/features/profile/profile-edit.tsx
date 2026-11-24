@@ -1,21 +1,29 @@
 'use client';
 
 import Link from 'next/link';
-import { User, UserUpdateSchema } from '@repo/schemas';
-import { ChevronLeft, Share, SquarePen } from 'lucide-react';
-import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar';
-import { Button, buttonVariants } from '../ui/button';
-import { Label } from '../ui/label';
-import { Switch } from '../ui/switch';
-import { Input } from '../ui/input';
-import { Textarea } from '../ui/textarea';
-import { Field, FieldGroup, FieldSet, FieldLabel, FieldError } from '../ui/field';
 import { useEffect, useState } from 'react';
-import { ProfileView } from './profile-view';
 import { useTranslations } from 'next-intl';
 import { Controller, useForm } from 'react-hook-form';
+import { ChevronLeft, Share, SquarePen } from 'lucide-react';
 import { valibotResolver } from '@hookform/resolvers/valibot';
-import { updateUserAction } from '@/app/actions/user';
+import { type User, UserUpdateSchema } from '@repo/schemas';
+
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Field,
+  FieldGroup,
+  FieldSet,
+  FieldLabel,
+  FieldError,
+} from '@/components/ui/field';
+
+import { ProfileView } from './profile-view';
+import { updateUserAction } from './actions';
 
 export function ProfileEdit({ user }: { user: User }) {
   const [isEdit, setIsEdit] = useState(false);

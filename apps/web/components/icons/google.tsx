@@ -1,9 +1,11 @@
-export function Google() {
+import { cn } from '@/lib/utils';
+
+export function Google({ className }: { className?: string }) {
   return (
     <svg
+      fill="#4285F4"
       role="img"
-      fill="white"
-      className="size-5"
+      className={cn('size-5', className)}
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
     >

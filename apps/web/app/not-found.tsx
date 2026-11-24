@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { Footer } from '@/components/footer';
-import { Header } from '@/components/header';
 import { getTranslations } from 'next-intl/server';
+
+import { Footer } from '@/components/layout/footer';
+import { Header } from '@/components/layout/header';
 
 export async function generateMetadata() {
   const t = await getTranslations('NotFoundPage');

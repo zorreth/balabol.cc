@@ -2,11 +2,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Suspense } from 'react';
 import { Menu } from 'lucide-react';
-import { Button, buttonVariants } from './ui/button';
-import { Skeleton } from './ui/skeleton';
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from './ui/sheet';
-import { UserMenu } from './user-menu';
 import { getTranslations } from 'next-intl/server';
+
+import { UserMenu } from '@/features/auth/user-menu';
+
+import { Button, buttonVariants } from '../ui/button';
+import { Skeleton } from '../ui/skeleton';
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from '../ui/sheet';
 
 export async function Header() {
   const t = await getTranslations('Header');
@@ -24,7 +26,7 @@ export async function Header() {
       name: t('opensource'),
       href: 'https://github.com/zorreth/balabol.cc',
     },
-  ];
+  ] as const;
 
   return (
     <header className="container mx-auto p-4 flex justify-between items-center">

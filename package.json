@@ -2,8 +2,11 @@
   "name": "balabol",
   "private": true,
   "scripts": {
-    "dev": "turbo run dev",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "format": "prettier --write ./**/*.{ts,tsx}",
     "db:migrate": "cd ./apps/backend && drizzle-kit migrate"
   },
   "devDependencies": {

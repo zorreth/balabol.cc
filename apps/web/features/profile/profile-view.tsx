@@ -1,10 +1,12 @@
-import { User } from '@repo/schemas';
-import { useTranslations } from 'next-intl';
-import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar';
-import { buttonVariants } from '../ui/button';
-import { cn } from 'cn';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import type { User } from '@repo/schemas';
+
+import { cn } from '@/lib/utils';
+
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { buttonVariants } from '@/components/ui/button';
 
 export function ProfileView({ user }: { user: User }) {
   const t = useTranslations('Profile');

@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { fetchCurrentUser, fetchUserByUsername } from '@/lib/api';
+
 import { ErrorMessage } from '@/components/error-message';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
-import { ProfileView } from '@/components/profile/profile-view';
-import { ProfileEdit } from '@/components/profile/profile-edit';
+import { Header } from '@/components/layout/header';
+import { Footer } from '@/components/layout/footer';
+import { ProfileView } from '@/features/profile/profile-view';
+import { ProfileEdit } from '@/features/profile/profile-edit';
+import { fetchUserByUsername } from '@/features/profile/api';
+import { fetchCurrentUser } from '@/features/auth/api';
 
 export async function generateMetadata({
   params,

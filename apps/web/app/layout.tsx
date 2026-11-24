@@ -13,6 +13,7 @@ const openSans = Open_Sans({
 export const metadata: Metadata = {
   title: 'Balabol.cc',
   description: 'A free and open-source link-in-bio platform.',
+  metadataBase: 'https://balabol.cc',
 };
 
 export default async function RootLayout({ children }: LayoutProps<'/'>) {

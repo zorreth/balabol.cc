@@ -1,3 +1,3 @@
-export * from './error.schema.ts';
-export * from './user.schema.ts';
-export * from './link.schema.ts';
+export * from './error.schema';
+export * from './user.schema';
+export * from './link.schema';

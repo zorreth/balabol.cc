@@ -1,6 +1,8 @@
 'use client';
 
-import { setUserLocale } from '@/app/actions/locale';
+import { useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+
 import {
   Select,
   SelectContent,
@@ -8,14 +10,14 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from './ui/select';
-import { useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+} from '@/components/ui/select';
+
+import { setUserLocale } from './actions';
 
 const langs = [
   { label: '🇬🇧 English', value: 'en' },
   { label: '🇷🇺 Русский', value: 'ru' },
-];
+] as const;
 
 export function LanguageSelect({ currentLocale }: { currentLocale?: string }) {
   const router = useRouter();

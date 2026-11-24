@@ -1,17 +1,23 @@
 import Image from 'next/image';
-import { LanguageSelect } from './language-select';
 import { getLocale, getTranslations } from 'next-intl/server';
+
+import { LanguageSelect } from '@/features/i18n/language-select';
+
+import { GitHub } from '../icons/github';
+import { Telegram } from '../icons/telegram';
 
 const socials = [
   {
-    name: 'GitHub',
+    icon: <GitHub className="size-8" />,
+    title: 'GitHub',
     href: 'https://github.com/zorreth/balabol.cc',
   },
   {
-    name: 'Telegram',
+    icon: <Telegram className="size-8" />,
+    title: 'Telegram',
     href: 'https://t.me/balabolcc',
   },
-];
+] as const;
 
 export async function Footer() {
   const t = await getTranslations('Footer');
@@ -37,8 +43,14 @@ export async function Footer() {
 
         <div className="flex gap-4">
           {socials.map((s) => (
-            <a className="hover:underline" key={s.href} href={s.href}>
-              {s.name}
+            <a
+              key={s.href}
+              href={s.href}
+              title={s.title}
+              className="hover:scale-105 transition-transform"
+              target="_blank"
+            >
+              {s.icon}
             </a>
           ))}
         </div>

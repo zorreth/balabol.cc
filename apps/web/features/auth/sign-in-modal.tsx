@@ -1,3 +1,5 @@
+import { getTranslations } from 'next-intl/server';
+
 import {
   Dialog,
   DialogTrigger,
@@ -5,14 +7,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from './ui/dialog';
-import { Button } from './ui/button';
-import { cn } from 'cn';
-import { buttonVariants } from './ui/button';
-import { GitHub } from './icons/github';
-import { Discord } from './icons/discord';
-import { Google } from './icons/google';
-import { getTranslations } from 'next-intl/server';
+} from '@/components/ui/dialog';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { GitHub } from '@/components/icons/github';
+import { Discord } from '@/components/icons/discord';
+import { Google } from '@/components/icons/google';
+import { cn } from '@/lib/utils';
 
 export async function SignInModal() {
   const t = await getTranslations('SignInModal');
@@ -39,7 +39,7 @@ export async function SignInModal() {
             href={`${process.env.BACKEND_URL}/v1/auth/discord`}
             className={cn(
               buttonVariants({ variant: 'default', size: 'lg' }),
-              'bg-[#5865F2] hover:bg-[#5865F2] text-base h-12 gap-3',
+              'bg-muted text-bg-muted-foreground hover:bg-muted text-base h-12 gap-3',
             )}
           >
             <Discord /> {t('discord')}
@@ -49,7 +49,7 @@ export async function SignInModal() {
             href={`${process.env.BACKEND_URL}/v1/auth/github`}
             className={cn(
               buttonVariants({ variant: 'default', size: 'lg' }),
-              'bg-black hover:bg-black text-base h-12 gap-3',
+              'bg-muted text-bg-muted-foreground hover:bg-muted text-base h-12 gap-3',
             )}
           >
             <GitHub /> {t('github')}
@@ -59,7 +59,7 @@ export async function SignInModal() {
             href={`${process.env.BACKEND_URL}/v1/auth/google`}
             className={cn(
               buttonVariants({ variant: 'default', size: 'lg' }),
-              'bg-[#4285F4] hover:bg-[#4285F4] text-base h-12 gap-3',
+              'bg-muted text-bg-muted-foreground hover:bg-muted text-base h-12 gap-3',
             )}
           >
             <Google /> {t('google')}
