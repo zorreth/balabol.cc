@@ -4,11 +4,12 @@ services:
     restart: unless-stopped
     shm_size: 128mb
     ports:
-      - 5432:5432
+      - 127.0.0.1:5432:5432
     volumes:
       - pgdata:/var/lib/postgresql
     environment:
       POSTGRES_DB: balabol
+      POSTGRES_USER: balabol
       POSTGRES_PASSWORD: password
 
 volumes:

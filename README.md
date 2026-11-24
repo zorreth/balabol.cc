@@ -20,21 +20,16 @@ This repository is a **monorepo**, using [Bun](https://bun.com) as the package m
 
 ## Getting Started
 
-1. Clone the repository:
+1. Clone and enter the repository:
    ```bash
    git clone [https://github.com/zorreth/balabol.cc.git](https://github.com/zorreth/balabol.cc.git)
    cd balabol.cc
    ```
-2. Run Postgres using Docker Compose:
+2. Run Postgres database service using Docker Compose:
    ```bash
-   docker compose up -d
+   docker compose up -d db
    ```
-3. Install dependencies and run database migrations:
-   ```bash
-   bun install
-   bun run db:migrate
-   ```
-4. Copy configuration files for the frontend and backend:
+3. Copy configuration files for the frontend and backend:
 
    ```bash
    cp apps/backend/.env.example apps/backend/.env
@@ -43,6 +38,11 @@ This repository is a **monorepo**, using [Bun](https://bun.com) as the package m
 
    See & edit them to match your needs.
 
+4. Install dependencies and run database migrations:
+   ```bash
+   bun install
+   bun run db:migrate
+   ```
 5. Run development server:
    ```bash
    bun run dev

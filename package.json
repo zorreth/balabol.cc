@@ -1,5 +1,11 @@
 {
   "name": "balabol",
+  "private": true,
+  "scripts": {
+    "dev": "turbo run dev",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:migrate": "cd ./apps/backend && drizzle-kit migrate"
+  },
   "devDependencies": {
     "drizzle-kit": "^1.0.0-rc.5-ab785fc",
     "prettier": "3.10.1",
@@ -14,12 +20,6 @@
   },
   "engines": {
     "node": ">=24"
-  },
-  "private": true,
-  "scripts": {
-    "dev": "turbo run dev",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "db:migrate": "cd ./apps/backend && drizzle-kit migrate"
   },
   "workspaces": [
     "apps/*",

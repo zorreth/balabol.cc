@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "@repo/tsconfig": "workspace:*",
-    "@types/bun": "^1.4.4",
+    "@types/bun": "^1.4.5",
     "drizzle-kit": "^1.0.0-rc.5-ab785fc"
   },
   "peerDependencies": {
@@ -19,11 +19,11 @@
     "@hono/oauth-providers": "^0.9.1",
     "@hono/standard-validator": "^0.4.1",
     "@repo/schemas": "workspace:*",
-    "@scalar/hono-api-reference": "^0.12.18",
+    "@scalar/hono-api-reference": "^0.12.24",
     "@valibot/to-json-schema": "^1.8.0",
     "drizzle-orm": "^1.0.0-rc.5-ab785fc",
-    "hono": "^4.13.17",
-    "hono-openapi": "^1.5.0",
+    "hono": "^4.13.21",
+    "hono-openapi": "^1.6.0",
     "pg": "^8.23.1",
     "valibot": "^1.5.0"
   }
